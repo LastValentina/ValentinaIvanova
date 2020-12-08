@@ -56,7 +56,7 @@ public class CalculatorDivTest extends AbstractCalculatorTest
         };
     }
 
-    @Test(enabled = false, description = "div by zero_long", dataProvider = "divZeroDataSetL",expectedExceptions = {NumberFormatException.class, ArithmeticException.class})
+    @Test(enabled = true, description = "div by zero_long", dataProvider = "divZeroDataSetL",expectedExceptions = {NumberFormatException.class, ArithmeticException.class})
     public void divZeroLongTest(long a){
         long actual=calculator.div(a,0);
     }
