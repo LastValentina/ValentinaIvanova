@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="calculator's methods test for Sub and Sum">
+
+    <test name="SumCalculatorTest">
+        <classes>
+            <class name="hw1.CalculatorSumTest"/>
+        </classes>
+    </test>
+
+</suite>
