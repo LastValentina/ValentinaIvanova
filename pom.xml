@@ -5,21 +5,21 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.training.center.qa.at</groupId>
-    <artifactId>initial</artifactId>
+    <artifactId>ValentinaIvanova</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <testng.version>7.3.0</testng.version>
     </properties>
 
-    <profiles>
+ <!--   <profiles>
         <profile>
             <id>default</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-            <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw0/testSuiteTemplate.xml</suite.file>
+           <properties>
+               <suite.file>${project.basedir}/src/test/resources/hw2/testSuiteTemplate.xml</suite.file>
             </properties>
         </profile>
         <profile>
@@ -28,7 +28,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw0/testSuite***.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw2/testSuite***.xml</suite.file>
             </properties>
         </profile>
         <profile>
@@ -49,7 +49,7 @@
                 <suite.file>${project.basedir}/src/test/resources/hw0/testSuite***.xml</suite.file>
             </properties>
         </profile>
-    </profiles>
+    </profiles>    -->
 
     <dependencies>
         <dependency>
@@ -58,7 +58,11 @@
             <version>7.3.0</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>3.141.59</version>
+        </dependency>
     </dependencies>
 <build>
     <plugins>
@@ -76,12 +80,12 @@
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>3.0.0-M5</version>
-            <configuration>
+ <!--           <configuration>
                 <suiteXmlFiles>
                     <suiteXmlFile>${suite.file}</suiteXmlFile>
-                    <!--                   <suiteXmlFile>${project.basedir}/src/test/resources/hw1/testSuiteSumSub.xml</suiteXmlFile>-->
-                </suiteXmlFiles>
-            </configuration>
+                                      <suiteXmlFile>${project.basedir}/src/test/resources/hw1/testSuiteSumSub.xml</suiteXmlFile>-->
+  <!--              </suiteXmlFiles>
+            </configuration> -->
         </plugin>
     </plugins>
 </build>
