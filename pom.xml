@@ -19,7 +19,7 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteSumSub.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw0/testSuiteTemplate.xml</suite.file>
             </properties>
         </profile>
         <profile>
@@ -28,7 +28,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw1/testSuite.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw0/testSuite***.xml</suite.file>
             </properties>
         </profile>
         <profile>
@@ -37,7 +37,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteMult.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw0/testSuite***.xml</suite.file>
             </properties>
         </profile>
         <profile>
@@ -46,7 +46,7 @@
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteSum.xml</suite.file>
+                <suite.file>${project.basedir}/src/test/resources/hw0/testSuite***.xml</suite.file>
             </properties>
         </profile>
     </profiles>
