@@ -6,7 +6,8 @@ import org.testng.asserts.SoftAssert;
 public class AdditionalMultTest extends AbstractCalculatorTest {
 
     @Test(description = "check mult method by accuracy",
-            dataProviderClass = DataProviderAdditionalMultTests.class, dataProvider = "multAdditDataSet")
+            dataProviderClass = DataProviderAdditionalMultTests.class,
+            dataProvider = "multAdditDataSet")
     public void multAdditionalTest(double a, double b, double expected) {
         SoftAssert softAssert = new SoftAssert();
         double delt = 100;
