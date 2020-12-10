@@ -12,6 +12,7 @@
         <classes>
             <class name="hw1.CalculatorMultTest"/>
             <class name="hw1.CalculatorDivTest"/>
+            <class name="hw1.AdditionalMultTest"/>
         </classes>
     </test>
 
