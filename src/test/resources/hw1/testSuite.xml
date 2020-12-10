@@ -1,23 +1,3 @@
-<!--<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="calculator's methods test">
-
-    <test name="SumSubCalculatorTest">
-        <classes>
-            <class name="hw1.CalculatorSumTest"/>
-            <class name="hw1.CalculatorSubTest"/>
-        </classes>
-    </test>
-
-    <test name="MultDivCalculatorTest">
-        <classes>
-            <class name="hw1.CalculatorMultTest"/>
-            <class name="hw1.CalculatorDivTest"/>
-            <class name="hw1.AdditionalMultTest"/>
-        </classes>
-    </test>
-
-</suite> -->
-
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="calculator's methods test">
     <test name="all">
