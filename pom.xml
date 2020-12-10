@@ -10,6 +10,7 @@
 
     <properties>
         <testng.version>7.3.0</testng.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <encoding.name>UTF-8</encoding.name>
     </properties>

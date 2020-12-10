@@ -1,4 +1,4 @@
-<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<!--<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="calculator's methods test">
 
     <test name="SumSubCalculatorTest">
@@ -16,4 +16,13 @@
         </classes>
     </test>
 
+</suite> -->
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="calculator's methods test">
+    <test name="all">
+        <packages>
+            <package name="hw1"/>
+        </packages>
+    </test>
 </suite>
