@@ -1,0 +1,4 @@
+Exercise 1. Test summary:
+1. Step7 (check that Texts below 4images in IndexPage equal to expected).
+for relevant test the name of HTML class sould be corrected (word "practiSe" to "practiCe"): 
+<span class="icons-benefit icon-practise"></span>
