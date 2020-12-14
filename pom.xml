@@ -17,7 +17,7 @@
 
     <profiles>
         <profile>
-            <id>default</id>
+            <id>hw2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
@@ -26,7 +26,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteSumSub</id>
+            <id>hw1_suiteSumSub</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -35,7 +35,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteAll</id>
+            <id>hw1_suiteAll</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -44,7 +44,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteMultDiv</id>
+            <id>hw1_suiteMultDiv</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -53,7 +53,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteSum</id>
+            <id>hw1_suiteSum</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>

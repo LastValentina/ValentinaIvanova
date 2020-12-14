@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,21 +15,23 @@ import java.util.concurrent.TimeUnit;
 
 public class Ex2Test {
     private WebDriver driver;
+    String url = "https://jdi-testing.github.io/jdi-light/index.html";
+    String login = "Roman";
+    String pass = "Jdi1234";
+    String user = "ROMAN IOVLEV";
+    String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
 
-    @Test
-    public void ex1Test() throws InterruptedException {
-        String url = "https://jdi-testing.github.io/jdi-light/index.html";
-        String login = "Roman";
-        String pass = "Jdi1234";
-        String user = "ROMAN IOVLEV";
-        String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
-
-        SoftAssert softAssert = new SoftAssert();
-        WebDriver driver = new ChromeDriver();
+    @BeforeTest
+    public void setUp() {
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
+    }
 
+    @Test
+    public void ex1Test() {
+        SoftAssert softAssert = new SoftAssert();
         //1. open site
         driver.get(url);
         softAssert.assertEquals(driver.getCurrentUrl(), url);
@@ -40,9 +44,12 @@ public class Ex2Test {
                 .findElement(By.cssSelector("ul[class='uui-navigation navbar-nav navbar-right'"))
                 .findElement(By.cssSelector("a[class='dropdown-toggle']"))
                 .click();
-        driver.findElement(By.xpath("//input[@id='name' and @class='uui-form-element']")).sendKeys(login);
-        driver.findElement(By.xpath("//input[@id='password' and @class='uui-form-element']")).sendKeys(pass);
-        driver.findElement(By.xpath("//button[@id='login-button' and @class='uui-button dark-blue btn-login']")).click();
+        driver.findElement(By.xpath("//input[@id='name' and @class='uui-form-element']"))
+                .sendKeys(login);
+        driver.findElement(By.xpath("//input[@id='password' and @class='uui-form-element']"))
+                .sendKeys(pass);
+        driver.findElement(By.xpath("//button[@id='login-button' and @class='uui-button dark-blue btn-login']"))
+                .click();
 
         //4. check user name on page after authorization
         softAssert.assertEquals(driver.findElement(By.xpath("//span[@id='user-name' and @ui='label']")).getText(), user);
@@ -88,8 +95,11 @@ public class Ex2Test {
         }
         softAssert.assertAll();
 
+    }
+
+    @AfterClass
+    public void tearDown() {
         //10. Close Browser
         driver.quit();
     }
-
 }

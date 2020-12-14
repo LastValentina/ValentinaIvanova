@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Ex1Test {
     WebDriver driver;
-    SoftAssert softAssert = new SoftAssert();
     String url = "https://jdi-testing.github.io/jdi-light/index.html";
     String login = "Roman";
     String pass = "Jdi1234";
@@ -29,24 +28,18 @@ public class Ex1Test {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-
     }
 
-    @Test(priority = 1)
-    public void openSiteTest() {
+    @Test
+    public void ex1Test() {
+        SoftAssert softAssert = new SoftAssert();
         //1. open site
         driver.get(url);
         softAssert.assertEquals(driver.getCurrentUrl(), url);
-    }
 
-    @Test(priority = 2)
-    public void titleTest() {
         //2. Browser title equals "Home Page"
         softAssert.assertEquals(driver.getTitle(), "Home Page");
-    }
 
-    @Test(priority = 3)
-    public void LoginTest() {
         //3. Perform login
         driver.findElement(By.cssSelector("header div[class='uui-header dark-gray'"))
                 .findElement(By.cssSelector("ul[class='uui-navigation navbar-nav navbar-right'"))
@@ -58,17 +51,11 @@ public class Ex1Test {
                 .sendKeys(pass);
         driver.findElement(By.xpath("//button[@id='login-button' and @class='uui-button dark-blue btn-login']"))
                 .click();
-    }
 
-    @Test(priority = 4)
-    public void nameOnPageTest() {
         //4. check user name on page after authorization
         softAssert.assertEquals(driver.findElement(By.xpath("//span[@id='user-name' and @ui='label']"))
                 .getText(), user);
-    }
 
-    @Test(priority = 5)
-    public void headerCheckTest() {
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
         List<WebElement> lsHeader = driver.findElement(By.cssSelector("ul[class='uui-navigation nav navbar-nav m-l8']"))
                 .findElements(By.cssSelector("li"));
@@ -79,10 +66,7 @@ public class Ex1Test {
         String actText = driver.findElement(By.cssSelector("ul[class='uui-navigation nav navbar-nav m-l8']"))
                 .findElement(By.cssSelector("[href='metals-colors.html']")).getText();
         softAssert.assertEquals(actText, header[3]);  //5.2# check 4th items of header
-    }
 
-    @Test(priority = 6)
-    public void imagesTest() {
         //6. four images on Index page are displayed
         List<WebElement> ls6 = driver.findElement(By.cssSelector("div[class='row clerafix benefits'"))
                 .findElements(By.cssSelector("span[class*='icons-benefit']"));
@@ -90,10 +74,7 @@ public class Ex1Test {
             softAssert.assertTrue(ls6.get(i6).isDisplayed(), "Image on Index page is not displayed");
             keyWord[i6] = (ls6.get(i6).getAttribute("class")).substring(19); // key-words for step7
         }
-    }
 
-    @Test(priority = 7)
-    public void textUnderImagesTest() {
         //7. Assert that there are 4 texts on the Index Page under icons and they have proper textAssert that there are 4 texts on the Index Page under icons and they have proper text
         // text would be compared with array keyWord - see step6
         List<WebElement> ls7 = driver.findElement(By.cssSelector("div[class='row clerafix benefits'"))
@@ -107,10 +88,7 @@ public class Ex1Test {
             boolean checkProperText = textBelowImage.contains(keyWord[i7]);
             softAssert.assertTrue(checkProperText, "the text below Image doesn't contain the proper word");
         }
-    }
 
-    @Test(priority = 8)
-    public void frameButtonTest() {
         //8.Assert that there is the iframe with “Frame Button” exist
         List<WebElement> ls8 = driver.findElements(By.tagName("iframe"));
         int counterFramesWithFrameButton = 0;
@@ -123,24 +101,15 @@ public class Ex1Test {
             driver.switchTo().defaultContent();
         }
         softAssert.assertTrue(counterFramesWithFrameButton > 0, "there is not frame with Frame Button");
-    }
 
-    @Test(priority = 9)
-    public void frameTest() {
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
         driver.switchTo().frame("frame");
         List<WebElement> ls9 = driver.findElements(By.cssSelector("[value='Frame Button']"));
         softAssert.assertEquals(ls9.size(), 1);
-    }
 
-    @Test(priority = 10)
-    public void frameOutTest() {
         //10.Switch to original window back
         driver.switchTo().defaultContent();
-    }
 
-    @Test(priority = 11)
-    public void leftSectionTest() {
         //11.Assert that there are 5 items in the Left Section are displayed and they have proper text
         WebElement el11 = driver.findElement(By.cssSelector("ul[class='sidebar-menu'"));
         for (String s : left) {
@@ -151,11 +120,9 @@ public class Ex1Test {
         softAssert.assertAll();
     }
 
-
     @AfterClass
     public void tearDown() {
         //12. Close Browser
         driver.quit();
     }
-
 }
