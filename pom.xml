@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.training.center.qa.at</groupId>
-    <artifactId>ValentinaIvanova_hw2</artifactId>
+    <artifactId>ValentinaIvanova</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -25,6 +25,42 @@
                 <suite.file>${project.basedir}/src/test/resources/hw2/testSuite.xml</suite.file>
             </properties>
         </profile>
+        <profile>
+            <id>suiteSumSub</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteSumSub.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>suiteAll</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw1/testSuite.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>suiteMultDiv</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteMultDiv.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>suiteSum</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteSum.xml</suite.file>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>
@@ -38,6 +74,13 @@
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
             <version>3.141.59</version>
+        </dependency>
+        <dependency>
+            <groupId>calculator-1.0</groupId>
+            <artifactId>community</artifactId>
+            <version>1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/calculator-1.0.jar</systemPath>
         </dependency>
     </dependencies>
 <build>
