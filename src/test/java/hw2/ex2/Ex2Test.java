@@ -1,53 +1,21 @@
 package hw2.ex2;
 
+import hw2.LoginTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class Ex2Test {
-    private WebDriver driver;
-    String url = "https://jdi-testing.github.io/jdi-light/index.html";
-    String url2 = "https://jdi-testing.github.io/jdi-light/different-elements.html";
-    String login = "Roman";
-    String pass = "Jdi1234";
-    String user = "ROMAN IOVLEV";
-    String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
-
-    @BeforeTest
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-    }
+public class Ex2Test extends LoginTest {
+    final String url2 = "https://jdi-testing.github.io/jdi-light/different-elements.html";
+    final String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
 
     @Test
-    public void ex1Test() {
-        SoftAssert softAssert = new SoftAssert();
-        //1. open site
-        driver.get(url);
-        softAssert.assertEquals(driver.getCurrentUrl(), url);
+    public void ex2Test() {
 
-        //2. Browser title equals "Home Page"
-        softAssert.assertEquals(driver.getTitle(), "Home Page");
-
-        //3. Perform login
-        driver.findElement(By.id("user-icon")).click();
-        driver.findElement(By.id("name")).sendKeys(login);
-        driver.findElement(By.id("password")).sendKeys(pass);
-        driver.findElement(By.id("login-button")).click();
-
-        //4. check user name on page after authorization
-        softAssert.assertEquals(driver.findElement(By.id("user-name")).getText(), user);
+        loginTest();
 
         //5.Open through the header menu Service -> Different Elements Page
         WebElement elNavbar = driver.findElement(By.cssSelector("header div.uui-header.dark-gray ul.uui-navigation.nav.navbar-nav.m-l8"));
@@ -57,6 +25,7 @@ public class Ex2Test {
         softAssert.assertEquals(driver.getCurrentUrl(), url2); //Page is opened
 
         //6.Select checkboxes
+        waitPresenceAllElements(driver, By.className("checkbox-row"));
         List<WebElement> chBox = driver.findElements(By.cssSelector("input[type=checkbox]"));
         chBox.get(0).click();
         softAssert.assertTrue(chBox.get(0).isSelected(), "Water is not ticked");
@@ -86,14 +55,8 @@ public class Ex2Test {
             } else {
                 actualContent = listLog.get(counterLog).getText().contains("value changed to");
             }
-            softAssert.assertTrue(actualContElement & actualContent, "Log for defined element doesn't relevanl");
+            softAssert.assertTrue(actualContElement && actualContent, "Log for defined element doesn't relevanl");
         }
         softAssert.assertAll();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        //10. Close Browser
-        driver.quit();
     }
 }

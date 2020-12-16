@@ -1,53 +1,21 @@
 package hw2.ex1;
 
+import hw2.LoginTest;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class Ex1Test {
-    WebDriver driver;
-    String url = "https://jdi-testing.github.io/jdi-light/index.html";
-    String login = "Roman";
-    String pass = "Jdi1234";
-    String user = "ROMAN IOVLEV";
-    String[] header = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
-    String[] left = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
-    String[] keyWord = new String[4];
-
-    @BeforeClass
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(3, TimeUnit.SECONDS);
-    }
+public class Ex1Test extends LoginTest {
+    final String[] header = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+    final String[] left = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
+    protected String[] keyWord = new String[4];
 
     @Test
     public void ex1Test() {
-        SoftAssert softAssert = new SoftAssert();
-        //1. open site
-        driver.get(url);
-        softAssert.assertEquals(driver.getCurrentUrl(), url);
 
-        //2. Browser title equals "Home Page"
-        softAssert.assertEquals(driver.getTitle(), "Home Page");
-
-        //3. Perform login
-        driver.findElement(By.id("user-icon")).click();
-        driver.findElement(By.id("name")).sendKeys(login);
-        driver.findElement(By.id("password")).sendKeys(pass);
-        driver.findElement(By.id("login-button")).click();
-
-        //4. check user name on page after authorization
-        softAssert.assertEquals(driver.findElement(By.id("user-name")).getText(), user);
+        loginTest();
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
         List<WebElement> lsHeader = driver.findElements(By.cssSelector("ul.uui-navigation.nav.navbar-nav.m-l8 li"));
@@ -61,7 +29,7 @@ public class Ex1Test {
 
         //6. four images on Index page are displayed
         List<WebElement> listBenefitIcons = driver.findElements
-                (By.cssSelector("div.row.clerafix.benefits span[class~=icons-benefit]"));
+                (By.cssSelector("div.row.clerafix.benefits span.icons-benefit"));
         for (int i = 0; i < 4; i++) {
             softAssert.assertTrue(listBenefitIcons.get(i).isDisplayed(), "Image on Index page is not displayed");
             keyWord[i] = (listBenefitIcons.get(i).getAttribute("class")).substring(19); // key-words for step7
@@ -103,16 +71,10 @@ public class Ex1Test {
         //11.Assert that there are 5 items in the Left Section are displayed and they have proper text
         WebElement elSideberMenu = driver.findElement(By.cssSelector("ul.sidebar-menu"));
         for (String s : left) {
-            String locatorSearchElementLeftSection = "//span[text()=" + "\'" + s + "\'" + "]";
+            String locatorSearchElementLeftSection = "//span[text()='" + s + "']";
             List<WebElement> searchElementLeftSection = elSideberMenu.findElements(By.xpath(locatorSearchElementLeftSection));
             softAssert.assertEquals(searchElementLeftSection.size(), 1);
         }
         softAssert.assertAll();
-    }
-
-    @AfterClass
-    public void tearDown() {
-        //12. Close Browser
-        driver.quit();
     }
 }
