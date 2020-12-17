@@ -5,28 +5,38 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.epam.training.center.qa.at</groupId>
-    <artifactId>ValentinaIvanova_hw1</artifactId>
+    <artifactId>ValentinaIvanova</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <testng.version>7.3.0</testng.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <testng.version>7.3.0</testng.version>
+        <selenium.version>3.141.59</selenium.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding.name>UTF-8</encoding.name>
     </properties>
 
     <profiles>
         <profile>
-            <id>default</id>
+            <id>hw2</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw2/testSuite.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>hw1_suiteSumSub</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw1/testSuiteSumSub.xml</suite.file>
             </properties>
         </profile>
         <profile>
-            <id>suiteAll</id>
+            <id>hw1_suiteAll</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -35,7 +45,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteMultDiv</id>
+            <id>hw1_suiteMultDiv</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -44,7 +54,7 @@
             </properties>
         </profile>
         <profile>
-            <id>suiteSum</id>
+            <id>hw1_suiteSum</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
@@ -60,6 +70,17 @@
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>${selenium.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.2</version>
         </dependency>
         <dependency>
             <groupId>calculator-1.0</groupId>
