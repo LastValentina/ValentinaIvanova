@@ -18,9 +18,18 @@
 
     <profiles>
         <profile>
-            <id>hw2</id>
+            <id>hw3</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw3/testSuite.xml</suite.file>
+            </properties>
+        </profile>
+        <profile>
+            <id>hw2</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw2/testSuite.xml</suite.file>
