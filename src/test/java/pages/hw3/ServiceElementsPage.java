@@ -55,5 +55,4 @@ public class ServiceElementsPage extends AbstractPage {
         return logs;
     }
 
-
 }

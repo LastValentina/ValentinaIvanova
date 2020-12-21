@@ -1,34 +1,45 @@
 package pages.hw3;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HeaderMenu {
-    //   WebDriver driver;
-    @FindBy(css = "ul.uui-navigation.nav.navbar-nav.m-l8 li")
-    private List<WebElement> preliminaryListHeaders;
-    @FindBy(css = "ul.uui-navigation.nav.navbar-nav.m-l8 [href='metals-colors.html']")
-    private WebElement header4;
+public class HeaderMenu extends AbstractPage {
+    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']/li/a")
+    private List<WebElement> listFourHeaders;
+    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']//ul[@class='dropdown-menu']/li/a")
+    private List<WebElement> listMenuService;
 
-    public List<ElementNameVisibility> listOfHeadersTextAndVisibility() {
-        WebElement header1 = preliminaryListHeaders.get(0);
-        WebElement header2 = preliminaryListHeaders.get(1);
-        WebElement header3 = preliminaryListHeaders.get(2);
-
-        List<ElementNameVisibility> listHeaderCondition = new ArrayList<>();
-        listHeaderCondition.add(new ElementNameVisibility(header1.getText(), header1.isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(header2.getText(), header2.isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(header3.getText(), header3.isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(header4.getText(), header4.isDisplayed()));
-
-        return listHeaderCondition;
+    public HeaderMenu(WebDriver driver) {
+        super(driver);
     }
 
-    public String getTest() {
-        return header4.getText();
+    public List<ElementNameVisibility> listHeadersNameAndVisibility() {
+        List<ElementNameVisibility> lsthead = new ArrayList<>();
+        lsthead.add(new ElementNameVisibility(listFourHeaders.get(0).getText(),
+                listFourHeaders.get(0).isDisplayed()));
+        lsthead.add(new ElementNameVisibility(listFourHeaders.get(1).getText(),
+                listFourHeaders.get(1).isDisplayed()));
+        lsthead.add(new ElementNameVisibility(listFourHeaders.get(2).getText(),
+                listFourHeaders.get(2).isDisplayed()));
+        lsthead.add(new ElementNameVisibility(listFourHeaders.get(3).getText(),
+                listFourHeaders.get(3).isDisplayed()));
+        return lsthead;
+    }
+
+    public String getHeader1Name() {
+        return listFourHeaders.get(0).getText();
+    }
+
+    public List<WebElement> getListHeaders() {
+        return listFourHeaders;
+    }
+
+    public List<WebElement> getListMenuService() {
+        return listMenuService;
     }
 
 }

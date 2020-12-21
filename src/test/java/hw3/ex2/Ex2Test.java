@@ -10,7 +10,7 @@ import pages.hw3.ServiceElementsPage;
 import java.util.List;
 
 public class Ex2Test extends AbstractBaseTest {
-    final String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
+    protected final static String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
 
     @Test
     protected void loginTest() {

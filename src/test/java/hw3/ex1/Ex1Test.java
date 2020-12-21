@@ -7,23 +7,21 @@ import pages.hw3.ElementNameVisibility;
 import pages.hw3.HomePage;
 
 public class Ex1Test extends AbstractBaseTest {
-    final static String[] header = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
-    final static String[] left = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
+    protected final static String[] header = {"HOME", "CONTACT FORM", "SERVICE", "METALS & COLORS"};
+    protected final static String[] left = {"Home", "Contact form", "Service", "Metals & Colors", "Elements packs"};
 
     @Test
     protected void loginTest() {
         SoftAssert softAssert = new SoftAssert();
         HomePage homePage = new HomePage(driver);
         homePage.openPage();
-        softAssert.assertTrue(homePage.openPage()); //1. open site
-        softAssert.assertEquals(homePage.headTitleText(), title); //2. Browser title equals "Home Page"
-        //3. Perform login //4. check user name on page after authorization
-        softAssert.assertEquals(homePage.login(login, pass), user);
-        //*************сделать позитивный и негативный сценарий!!!
+        softAssert.assertTrue(homePage.openPage());                 //1. open site
+        softAssert.assertEquals(homePage.headTitleText(), title);   //2. Browser title equals "Home Page"
+        softAssert.assertEquals(homePage.login(login, pass), user); //3. Perform login //4. check user name on page after authorization
 
         //5. Assert that there are 4 items on the header section are displayed and they have proper texts
         int i = 0;
-        for (ElementNameVisibility env : homePage.listOfHeadersTextAndVisibility()) {
+        for (ElementNameVisibility env : homePage.getHeaderMenu().listHeadersNameAndVisibility()) {
             softAssert.assertTrue(env.getVisible(), "element is not displayed");
             softAssert.assertEquals(env.getName(), header[i]);
             i++;
@@ -34,7 +32,7 @@ public class Ex1Test extends AbstractBaseTest {
         i = 0;
         for (ElementNameVisibility env : homePage.listOfPicturesTextAndVisibility()) {
             softAssert.assertTrue(env.getVisible(), "benefit-icon is not displayed");
-            keyWord[i] = env.getName(); // array keyWord is used for assert from step7
+            keyWord[i] = env.getName();             // array keyWord is used for assert from step7
             i++;
         }
 
@@ -51,7 +49,7 @@ public class Ex1Test extends AbstractBaseTest {
 
         //9.Switch to the iframe and check that there is “Frame Button” in the iframe
         softAssert.assertTrue(homePage.frameButtonExist(), "there isn't element Frame Button");
-        homePage.switchBackFromFrame(); //10.Switch to original window back
+        homePage.switchBackFromFrame();         //10.Switch to original window back
 
         //11.Assert that there are 5 items in the Left Section are displayed and they have proper text
         i = 0;
@@ -62,7 +60,5 @@ public class Ex1Test extends AbstractBaseTest {
         }
         softAssert.assertAll();
     }
-
-
 }
 

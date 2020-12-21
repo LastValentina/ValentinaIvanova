@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
 public class HomePageEx2 extends AbstractPage {
     private static final String homeUrl = "https://jdi-testing.github.io/jdi-light/index.html";
     private HeaderMenu headerMenu;
@@ -22,20 +20,14 @@ public class HomePageEx2 extends AbstractPage {
     @FindBy(id = "user-name")
     private WebElement userName;
 
-    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']/li/a")
-    private List<WebElement> listHeaders;
-
-
-    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']//ul[@class='dropdown-menu']/li/a")
-    private List<WebElement> listMenuService;
-
-
     public HomePageEx2(WebDriver driver) {
         super(driver);
-        //   headerMenu = new HeaderMenu();
+        headerMenu = new HeaderMenu(driver);
     }
 
-//    public HeaderMenu getHeaderMenu() {return headerMenu;}
+    public HeaderMenu getHeaderMenu() {
+        return headerMenu;
+    }
 
     public HomePageEx2 openPage() {
         driver.get(homeUrl);
@@ -65,8 +57,8 @@ public class HomePageEx2 extends AbstractPage {
     }
 
     public ServiceElementsPage clickServiceElementsPage() {
-        listHeaders.get(2).click();
-        listMenuService.get(7).click();
+        getHeaderMenu().getListHeaders().get(2).click();
+        getHeaderMenu().getListMenuService().get(7).click();
         return new ServiceElementsPage(driver);
     }
 

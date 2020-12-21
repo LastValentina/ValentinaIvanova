@@ -20,7 +20,6 @@ public class AbstractBaseTest {
 
     @BeforeClass
     public void setUpLogin() {
-
         FileInputStream fis;
         Properties property = new Properties();
         try {
@@ -42,11 +41,7 @@ public class AbstractBaseTest {
 
     @AfterClass
     public void tearDown() {
-        //12. Close Browser
-        driver.quit();
+        driver.quit();              //12. Close Browser
     }
-
-//    protected void loginTest() {}
-
 
 }

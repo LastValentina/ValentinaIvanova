@@ -22,8 +22,6 @@ public class HomePage extends AbstractPage {
     private WebElement loginButton;
     @FindBy(id = "user-name")
     private WebElement userName;
-    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']/li/a")
-    private List<WebElement> listHeaders;
     @FindBy(css = "div.row.clerafix.benefits span.icons-benefit")
     private List<WebElement> listBenefitIcons;
     @FindBy(css = "div.row.clerafix.benefits span.benefit-txt")
@@ -37,7 +35,7 @@ public class HomePage extends AbstractPage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        headerMenu = new HeaderMenu();
+        headerMenu = new HeaderMenu(driver);
     }
 
     public HeaderMenu getHeaderMenu() {
@@ -65,15 +63,6 @@ public class HomePage extends AbstractPage {
 
     public String headTitleText() {
         return driver.getTitle();
-    }
-
-    public List<ElementNameVisibility> listOfHeadersTextAndVisibility() {
-        List<ElementNameVisibility> listHeaderCondition = new ArrayList<>();
-        listHeaderCondition.add(new ElementNameVisibility(listHeaders.get(0).getText(), listHeaders.get(0).isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(listHeaders.get(1).getText(), listHeaders.get(1).isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(listHeaders.get(2).getText(), listHeaders.get(2).isDisplayed()));
-        listHeaderCondition.add(new ElementNameVisibility(listHeaders.get(3).getText(), listHeaders.get(3).isDisplayed()));
-        return listHeaderCondition;
     }
 
     public List<ElementNameVisibility> listOfPicturesTextAndVisibility() {

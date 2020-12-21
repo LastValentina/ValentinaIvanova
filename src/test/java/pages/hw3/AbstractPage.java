@@ -20,5 +20,4 @@ public abstract class AbstractPage {
                 .until(ExpectedConditions.elementToBeClickable(element));
     }
 
-
 }
