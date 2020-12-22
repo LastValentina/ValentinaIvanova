@@ -18,7 +18,8 @@ public class Ex2Test extends LoginTest {
         loginTest();
 
         //5.Open through the header menu Service -> Different Elements Page
-        WebElement elNavbar = driver.findElement(By.cssSelector("header div.uui-header.dark-gray ul.uui-navigation.nav.navbar-nav.m-l8"));
+        WebElement elNavbar = driver.findElement
+                (By.cssSelector("header div.uui-header.dark-gray ul.uui-navigation.nav.navbar-nav.m-l8"));
         elNavbar.findElement(By.cssSelector("a.dropdown-toggle")).click();
         elNavbar.findElement(By.cssSelector("ul.dropdown-menu"))
                 .findElement(By.xpath("//a[text()='Different elements']")).click();

@@ -24,17 +24,18 @@ public class Ex2Test extends AbstractBaseTest {
 
         ServiceElementsPage serviceElementsPage =
                 homePageEx2.clickServiceElementsPage();             //5.Open through the header menu Service -> Different Elements Page
-        serviceElementsPage.ClickCheckBox(0)                        //6.Select checkboxes
-                .ClickCheckBox(2)
-                .ClickRadio(3)                                      //7.Select radio
-                .SelectFromDropDown(elementsTest[3][0]);            //8.Select in dropdown
+        serviceElementsPage.waitLoadPage()
+                .clickCheckBox(0)                                    //6.Select checkboxes
+                .clickCheckBox(2)
+                .clickRadio(3)                                      //7.Select radio
+                .selectFromDropDown(elementsTest[3][0]);            //8.Select in dropdown
 
-        softAssert.assertTrue(serviceElementsPage.CheckBoxSelected(0), "Water is not ticked");
-        softAssert.assertTrue(serviceElementsPage.CheckBoxSelected(2), "Wind is not ticked");
-        softAssert.assertTrue(!serviceElementsPage.CheckBoxSelected(1), "Earth is ticked");
-        softAssert.assertTrue(!serviceElementsPage.CheckBoxSelected(3), "Fire is ticked");
-        softAssert.assertTrue(serviceElementsPage.RadioSelected(3), "Selen is not selected");
-        softAssert.assertEquals(serviceElementsPage.DropDownSelected(), elementsTest[3][0]);
+        softAssert.assertTrue(serviceElementsPage.checkBoxSelected(0), "Water is not ticked");
+        softAssert.assertTrue(serviceElementsPage.checkBoxSelected(2), "Wind is not ticked");
+        softAssert.assertTrue(!serviceElementsPage.checkBoxSelected(1), "Earth is ticked");
+        softAssert.assertTrue(!serviceElementsPage.checkBoxSelected(3), "Fire is ticked");
+        softAssert.assertTrue(serviceElementsPage.radioSelected(3), "Selen is not selected");
+        softAssert.assertEquals(serviceElementsPage.dropDownSelected(), elementsTest[3][0]);
 
         //9.Assert for Log
         List<WebElement> listLog = serviceElementsPage.getLogs();

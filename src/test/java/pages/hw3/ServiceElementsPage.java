@@ -3,12 +3,14 @@ package pages.hw3;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
 public class ServiceElementsPage extends AbstractPage {
-    //   private HeaderMenu headerMenu;
+    private HeaderMenu headerMenu;
     @FindBy(css = "input[type=checkbox]")
     private List<WebElement> chBoxs;
     @FindBy(css = "input[type=radio]")
@@ -20,39 +22,44 @@ public class ServiceElementsPage extends AbstractPage {
 
     public ServiceElementsPage(WebDriver driver) {
         super(driver);
+        headerMenu = new HeaderMenu(driver);
     }
 
-    public ServiceElementsPage ClickCheckBox(int k) {
+    public ServiceElementsPage clickCheckBox(int k) {
         chBoxs.get(k).click();
         return this;
     }
 
-    public boolean CheckBoxSelected(int k) {
+    public boolean checkBoxSelected(int k) {
         return chBoxs.get(k).isSelected();
     }
 
-    public ServiceElementsPage ClickRadio(int k) {
+    public ServiceElementsPage clickRadio(int k) {
         radioBtn.get(k).click();
         return this;
     }
 
-    public boolean RadioSelected(int k) {
+    public boolean radioSelected(int k) {
         return radioBtn.get(k).isSelected();
     }
 
-    public ServiceElementsPage SelectFromDropDown(String color) {
-        //       Select drp=new Select(dropDowhList);
-        //       drp.selectByVisibleText(color);
+    public ServiceElementsPage selectFromDropDown(String color) {
         new Select(dropDowhList).selectByVisibleText(color);
         return this;
     }
 
-    public String DropDownSelected() {
+    public String dropDownSelected() {
         return new Select(dropDowhList).getFirstSelectedOption().getText();
     }
 
     public List<WebElement> getLogs() {
         return logs;
+    }
+
+    public ServiceElementsPage waitLoadPage() {
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.visibilityOfAllElements(chBoxs));
+        return this;
     }
 
 }
