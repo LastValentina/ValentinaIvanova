@@ -3,8 +3,6 @@ package pages.hw3;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +28,10 @@ public class HomePage extends AbstractPage {
     private List<WebElement> listIframes;
     @FindBy(css = "input[value='Frame Button']")
     private List<WebElement> frameButton;
-    @FindBy(xpath = "//ul[@class='sidebar-menu']/li/a/span")
+    @FindBy(css = "ul.sidebar-menu>li>a>span")  //(xpath = "//ul[@class='sidebar-menu']/li/a/span")
     private List<WebElement> sideBarMenu;
+    @FindBy(css = "span.login-txt")
+    private WebElement wrongLogin;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -44,20 +44,36 @@ public class HomePage extends AbstractPage {
 
     public boolean openPage() {
         driver.get(homeUrl);
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.elementToBeClickable(userIcon));
+        waitClicableElement(userIcon);
         return true;
     }
 
-    public String login(String name, String password) {
+    public void clickUserIcon() {
         userIcon.click();
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.visibilityOf(login));
+        waitVisibleElement(login);
+    }
+
+    public void login(String name, String password) {
         login.sendKeys(name);
         this.password.sendKeys(password);
         loginButton.click();
-        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.visibilityOf(userName));
+        waitVisibleElement(userName);
+    }
+
+    public void differentLogin(String name, String password) {
+        login.clear();
+        login.sendKeys(name);
+        this.password.clear();
+        this.password.sendKeys(password);
+        loginButton.click();
+    }
+
+
+    public void clearLoginField() {
+        login.clear();
+    }
+
+    public String getUserName() {
         return userName.getText();
     }
 
@@ -67,29 +83,21 @@ public class HomePage extends AbstractPage {
 
     public List<ElementNameVisibility> listOfPicturesTextAndVisibility() {
         List<ElementNameVisibility> list = new ArrayList<>();
-
         list.add(new ElementNameVisibility(listBenefitIcons.get(0).getAttribute("class").substring(19, 25),
                 listBenefitIcons.get(0).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitIcons.get(1).getAttribute("class").substring(19),
-                listBenefitIcons.get(1).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitIcons.get(2).getAttribute("class").substring(19),
-                listBenefitIcons.get(2).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitIcons.get(3).getAttribute("class").substring(19),
-                listBenefitIcons.get(3).isDisplayed()));
+        for (int i = 1; i < 4; i++) {
+            list.add(new ElementNameVisibility(listBenefitIcons.get(i).getAttribute("class").substring(19),
+                    listBenefitIcons.get(i).isDisplayed()));
+        }
         return list;
     }
 
     public List<ElementNameVisibility> listOfBenefitDescTextAndVisibility() {
         List<ElementNameVisibility> list = new ArrayList<>();
-
-        list.add(new ElementNameVisibility(listBenefitDesc.get(0).getAttribute("innerHTML"),
-                listBenefitDesc.get(0).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitDesc.get(1).getAttribute("innerHTML"),
-                listBenefitDesc.get(1).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitDesc.get(2).getAttribute("innerHTML"),
-                listBenefitDesc.get(2).isDisplayed()));
-        list.add(new ElementNameVisibility(listBenefitDesc.get(3).getAttribute("innerHTML"),
-                listBenefitDesc.get(3).isDisplayed()));
+        for (int i = 0; i < 4; i++) {
+            list.add(new ElementNameVisibility(listBenefitDesc.get(i).getAttribute("innerHTML"),
+                    listBenefitDesc.get(i).isDisplayed()));
+        }
         return list;
     }
 
@@ -122,4 +130,7 @@ public class HomePage extends AbstractPage {
         return listLeftMenu;
     }
 
+    public boolean loginTxtVisibility() {
+        return wrongLogin.isDisplayed();
+    }
 }

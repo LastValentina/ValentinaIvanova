@@ -13,7 +13,7 @@ public class Ex2Test extends AbstractBaseTest {
     protected final static String[][] elementsTest = {{"Water", "cbox"}, {"Wind", "cbox"}, {"Selen", "radio"}, {"Yellow", "dd"}};
 
     @Test
-    protected void loginTest() {
+    protected void ex2Test() {
         SoftAssert softAssert = new SoftAssert();
         HomePageEx2 homePageEx2 = new HomePageEx2(driver)
                 .openPage()                                         //1. open site
@@ -37,7 +37,12 @@ public class Ex2Test extends AbstractBaseTest {
         softAssert.assertTrue(serviceElementsPage.radioSelected(3), "Selen is not selected");
         softAssert.assertEquals(serviceElementsPage.dropDownSelected(), elementsTest[3][0]);
 
-        //9.Assert for Log
+        checkLog(softAssert, serviceElementsPage);                  //9.Assert for Log
+
+        softAssert.assertAll();
+    }
+
+    protected void checkLog(SoftAssert softAssert, ServiceElementsPage serviceElementsPage) {
         List<WebElement> listLog = serviceElementsPage.getLogs();
         softAssert.assertEquals(listLog.size(), elementsTest.length);   //check number of items in Log
         for (int i = 0; i < elementsTest.length; i++) {
@@ -51,7 +56,7 @@ public class Ex2Test extends AbstractBaseTest {
             }
             softAssert.assertTrue(actualContElement && actualContent, "Log for defined element doesn't relevanl");
         }
-        softAssert.assertAll();
     }
+
 }
 
