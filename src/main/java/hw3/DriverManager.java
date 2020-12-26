@@ -6,21 +6,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 public class DriverManager {
-    private final WebDriver driver;
 
-    DriverManager() {
+    public static WebDriver getChromeDriver() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
-    }
-
-    public WebDriver getDriver() {
-        return this.driver;
-    }
-
-    public void closeDriver() {
-        driver.quit();
+        return new ChromeDriver(options);
     }
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class HeaderMenu extends AbstractPage {
     @FindBy(css = "ul.uui-navigation.nav.navbar-nav.m-l8>li>a")
     private List<WebElement> listFourHeaders;
-    @FindBy(xpath = "//ul[@class='uui-navigation nav navbar-nav m-l8']//ul[@class='dropdown-menu']/li/a")
+    @FindBy(css = "ul.uui-navigation.nav.navbar-nav.m-l8 ul.dropdown-menu>li>a")
     private List<WebElement> listMenuService;
 
     public HeaderMenu(WebDriver driver) {

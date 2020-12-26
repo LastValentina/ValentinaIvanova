@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Properties;
 
 public class AbstractBaseTest {
-    public WebDriver driver;
+    protected WebDriver driver;
     protected String login;
     protected String pass;
     protected String user;
@@ -21,23 +21,23 @@ public class AbstractBaseTest {
 
     @BeforeClass
     public void setUp() {
+
         Properties property = new Properties();
         String fileName = "hw3/loginPage.properties";
-
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
              InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
             property.load(reader);
-            login = property.getProperty("field.login");
-            pass = property.getProperty("field.password");
-            user = property.getProperty("field.user");
-            title = property.getProperty("field.title");
-            wrongpass = property.getProperty("field.wrongpass");
+            login = property.getProperty("site.login");
+            pass = property.getProperty("site.password");
+            user = property.getProperty("site.user");
+            title = property.getProperty("site.title");
+            wrongpass = property.getProperty("site.wrongpass");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        driver = new DriverManager().getDriver();
+        driver = DriverManager.getChromeDriver();
 
     }
 
