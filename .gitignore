@@ -6,3 +6,6 @@
 /target/
 #LodFiles
 *.log
+#Allure
+**/allure-results
+**/.allure

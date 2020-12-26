@@ -35,7 +35,7 @@ public class Ex1Test extends LoginTest {
             keyWord[i] = (listBenefitIcons.get(i).getAttribute("class")).substring(19); // key-words for step7
         }
 
-        //7. Assert that there are 4 texts on the Index Page under icons and they have proper textAssert that there are 4 texts on the Index Page under icons and they have proper text
+        //7. Assert that there are 4 texts on the Index Page under icons and they have proper text
         // text would be compared with array keyWord - see step6
         List<WebElement> listBenefitDesc = driver.findElements(By.cssSelector("div.row.clerafix.benefits span.benefit-txt"));
         for (int i = 0; i < 4; i++) {
