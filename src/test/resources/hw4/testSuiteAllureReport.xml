@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="webPageTest">
+    <listeners>
+        <listener class-name="hw4.ListenerTest"/>
+    </listeners>
+    <test name="UsageAllureReportTest">
+        <classes>
+            <class name="hw4.SeleniumVoidPageObjectTest"/>
+            <class name="hw4.SeleniumFluentPageObjectTest"/>
+            <class name="hw4.SeleniumContainedErrorTest"/>
+        </classes>
+    </test>
+</suite>
