@@ -14,7 +14,7 @@ public class ActionStep extends AbstractStep {
         homePage.openPage();
     }
 
-    @Step("perform login with login='{login}' and password='{pass}'")
+    @Step("perform login with login={login} and password={pass}")
     public void login(String login, String pass) {
         homePage.clickUserIcon();
         homePage.login(login, pass);

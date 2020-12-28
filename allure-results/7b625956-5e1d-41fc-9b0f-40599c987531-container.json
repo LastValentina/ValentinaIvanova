@@ -1,0 +1,36 @@
+{
+  "uuid": "7b625956-5e1d-41fc-9b0f-40599c987531",
+  "name": "hw3.ex1.Ex1Test",
+  "children": [
+    "753620e5-735b-45ae-891d-6f60319a181f"
+  ],
+  "befores": [
+    {
+      "name": "setUp",
+      "status": "passed",
+      "stage": "finished",
+      "description": "",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1608985392432,
+      "stop": 1608985399551
+    }
+  ],
+  "afters": [
+    {
+      "name": "tearDown",
+      "status": "passed",
+      "stage": "finished",
+      "description": "",
+      "steps": [],
+      "attachments": [],
+      "parameters": [],
+      "start": 1608985403970,
+      "stop": 1608985404835
+    }
+  ],
+  "links": [],
+  "start": 1608985392361,
+  "stop": 1608985413401
+}

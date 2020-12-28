@@ -7,7 +7,7 @@
         <classes>
             <class name="hw4.SeleniumVoidPageObjectTest"/>
             <class name="hw4.SeleniumFluentPageObjectTest"/>
-            <class name="hw4.SeleniumContainedErrorTest"/>
+           <class name="hw4.SeleniumContainedErrorTest"/>
         </classes>
     </test>
 </suite>

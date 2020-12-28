@@ -21,12 +21,12 @@ public class AssertionStep extends AbstractStep {
         softAssert.assertTrue(homePage.openPage());
     }
 
-    @Step("check that browser title equals '{title}'")
+    @Step("check that browser title equals {title}")
     public void homePageTitleIsRelevant(String title) {
         softAssert.assertEquals(homePage.headTitleText(), title);
     }
 
-    @Step("check that field User Name is equel '{user}'")
+    @Step("check that field User Name equals {user}")
     public void checkUserName(String user) {
         softAssert.assertEquals(homePage.getUserName(), user);
     }

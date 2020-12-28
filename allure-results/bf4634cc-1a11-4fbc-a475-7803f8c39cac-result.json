@@ -1,0 +1,61 @@
+{
+  "name": "ex2Test",
+  "status": "passed",
+  "statusDetails": {
+    "known": false,
+    "muted": false,
+    "flaky": false
+  },
+  "stage": "finished",
+  "steps": [],
+  "attachments": [],
+  "parameters": [],
+  "start": 1608985408144,
+  "stop": 1608985412020,
+  "uuid": "bf4634cc-1a11-4fbc-a475-7803f8c39cac",
+  "historyId": "3f62aa38db147e1121f619d26e8aeeb7",
+  "fullName": "hw3.ex2.Ex2Test.ex2Test",
+  "labels": [
+    {
+      "name": "package",
+      "value": "hw3.ex2.Ex2Test"
+    },
+    {
+      "name": "testClass",
+      "value": "hw3.ex2.Ex2Test"
+    },
+    {
+      "name": "testMethod",
+      "value": "ex2Test"
+    },
+    {
+      "name": "parentSuite",
+      "value": "webPageTest"
+    },
+    {
+      "name": "suite",
+      "value": "ex1Test"
+    },
+    {
+      "name": "subSuite",
+      "value": "hw3.ex2.Ex2Test"
+    },
+    {
+      "name": "host",
+      "value": "DESKTOP-3UOUTRQ"
+    },
+    {
+      "name": "thread",
+      "value": "7028@DESKTOP-3UOUTRQ.main(1)"
+    },
+    {
+      "name": "framework",
+      "value": "testng"
+    },
+    {
+      "name": "language",
+      "value": "java"
+    }
+  ],
+  "links": []
+}

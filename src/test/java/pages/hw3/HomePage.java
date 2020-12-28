@@ -57,7 +57,7 @@ public class HomePage extends AbstractPage {
         login.sendKeys(name);
         this.password.sendKeys(password);
         loginButton.click();
-        waitVisibleElement(userName);
+//        waitVisibleElement(userName);
     }
 
     public void differentLogin(String name, String password) {
@@ -133,4 +133,11 @@ public class HomePage extends AbstractPage {
     public boolean loginTxtVisibility() {
         return wrongLogin.isDisplayed();
     }
+
+    public ServiceElementsPage clickServiceElementsPage() {
+        getHeaderMenu().getListHeaders().get(2).click();
+        getHeaderMenu().getListMenuService().get(7).click();
+        return new ServiceElementsPage(driver);
+    }
+
 }

@@ -9,7 +9,7 @@ public class SeleniumFluentPageObjectTest extends AbstractBaseSeleniumTest {
 
     @Feature(value = "Service Elements Page Test")
     @Story(value = "check-box, radio, drop-down elements checking")
-    @Test
+    @Test(description = "Check selection of elements & Log on DifferentElementsPage")
     public void exFluentPOTest() {
         actionStep.openHomePage();                                             //1. open site
         assertionStep.homePageTitleIsRelevant(title);                          //2. Browser title equals "Home Page"
