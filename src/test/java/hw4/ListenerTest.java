@@ -15,7 +15,7 @@ public class ListenerTest implements ITestListener {
     }
 
     @Attachment(type = "image/png", fileExtension = ".png")
-    private byte[] attachScreenShot(WebDriver driver) {
+    public byte[] attachScreenShot(WebDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 }
