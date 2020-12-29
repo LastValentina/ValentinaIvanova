@@ -18,6 +18,7 @@ public class ActionStep extends AbstractStep {
     public void login(String login, String pass) {
         homePage.clickUserIcon();
         homePage.login(login, pass);
+        homePage.waitElementUserName();
     }
 
     @Step("switch from Frame back to Index page")
@@ -55,5 +56,12 @@ public class ActionStep extends AbstractStep {
         homePageEx2
                 .openPage()
                 .login(login, pass);
+    }
+
+    @Step("perform login")
+    public void loginN(String login, String pass) {
+        homePage.clickUserIcon();
+        homePage.login(login, pass);
+        homePage.waitElementLoginFaild();
     }
 }

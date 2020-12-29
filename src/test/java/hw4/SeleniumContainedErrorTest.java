@@ -14,7 +14,7 @@ public class SeleniumContainedErrorTest extends AbstractBaseSeleniumTest {
         actionStep.openHomePage();                                             //1. open site
         assertionStep.homePageLoaded();
         assertionStep.homePageTitleIsRelevant(title);                          //2. Browser title equals "Home Page"
-        actionStep.login(login, wrongpass);                                    //3. Perform login
+        actionStep.loginN(login, wrongpass);                                    //3. Perform login
         assertionStep.checkUserName(user);                                     //4. check user name on page after authorization
         assertionStep.totalAssert();                                           //softAssert.assertAll();
     }

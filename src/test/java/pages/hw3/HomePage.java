@@ -20,6 +20,8 @@ public class HomePage extends AbstractPage {
     private WebElement loginButton;
     @FindBy(id = "user-name")
     private WebElement userName;
+    @FindBy(css = "span.login-txt")
+    private WebElement loginFaild;
     @FindBy(css = "div.row.clerafix.benefits span.icons-benefit")
     private List<WebElement> listBenefitIcons;
     @FindBy(css = "div.row.clerafix.benefits span.benefit-txt")
@@ -57,7 +59,14 @@ public class HomePage extends AbstractPage {
         login.sendKeys(name);
         this.password.sendKeys(password);
         loginButton.click();
-//        waitVisibleElement(userName);
+    }
+
+    public void waitElementUserName() {
+        waitVisibleElement(userName);
+    }
+
+    public void waitElementLoginFaild() {
+        waitVisibleElement(loginFaild);
     }
 
     public void differentLogin(String name, String password) {
@@ -67,7 +76,6 @@ public class HomePage extends AbstractPage {
         this.password.sendKeys(password);
         loginButton.click();
     }
-
 
     public void clearLoginField() {
         login.clear();

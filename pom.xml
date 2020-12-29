@@ -12,18 +12,24 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <encoding.name>UTF-8</encoding.name>
-        <!-- dependency versions -->
         <testng.version>7.3.0</testng.version>
         <webdrivermanager.version>4.2.2</webdrivermanager.version>
         <selenium.version>3.141.59</selenium.version>
         <aspectj.version>1.8.10</aspectj.version>
         <allure.version>2.13.7</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
-
-
     </properties>
 
     <profiles>
+        <profile>
+            <id>hw5</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <suite.file>${project.basedir}/src/test/resources/hw5/testSuiteCucumber.xml</suite.file>
+            </properties>
+        </profile>
         <profile>
             <id>hw4</id>
             <activation>
