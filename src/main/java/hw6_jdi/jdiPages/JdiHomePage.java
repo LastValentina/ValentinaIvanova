@@ -38,9 +38,4 @@ public class JdiHomePage extends WebPage {
         return userName.getText();
     }
 
-    //   public void logout() {
-    //      if(logout.isDisabled()) {  userIcon.click(); }
-    //       logout.click();
-//    }
-
 }

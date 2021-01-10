@@ -5,11 +5,15 @@ import com.epam.jdi.light.elements.init.PageFactory;
 import hw6_jdi.entities.MetalsColors;
 import hw6_jdi.entities.MetalsColorsJ;
 import hw6_jdi.entities.User;
+import hw6_jdi.forms.MetalsColorsForm;
 import hw6_jdi.jdiPages.LeftMenuSection;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static hw6_jdi.JdiSite.*;
 
@@ -29,13 +33,20 @@ public class JdiTest {
         jdiMetalsColorsPage.checkOpened();                          //Assert.assertEquals(getTitle(), "Metal and Colors");
 
         jdiMetalsColorsPage.metalsColorsForm.fillForm(new MetalsColors(dataSet.getRadio1(), dataSet.getRadio2(),
-                dataSet.getElementsAsString(), dataSet.getColor(), dataSet.getMetals(),
-                dataSet.getVegetablesAsString()));
-        jdiMetalsColorsPage.metalsColorsForm.submit();
+                dataSet.getElementsAsString(), dataSet.getColor(), dataSet.getMetals(), dataSet.getVegetablesAsString()));
 
+        //Assertion block for selected elements in Metals & Colors Form
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_odd.getValue(), dataSet.getRadio1());
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_even.getValue(), dataSet.getRadio2());
+        MetalsColorsForm.metal.is().selected(dataSet.getMetals());
+        MetalsColorsForm.color.is().selected(dataSet.getColor());
+        List<String> list = Arrays.asList(dataSet.getElements());
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.elements.checked(), list);
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.vegetables.selected(), dataSet.getVegetablesAsString());
+
+        jdiMetalsColorsPage.metalsColorsForm.submit();
         Assert.assertEquals(jdiMetalsColorsPage.convertResultBlockToClass(),
                 dataSet.convertToResultClass());
-
         jdiMetalsColorsPage.headerSection.logout();
     }
 

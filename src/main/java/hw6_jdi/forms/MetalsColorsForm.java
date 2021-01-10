@@ -17,7 +17,7 @@ public class MetalsColorsForm extends Form<MetalsColors> {
     @FindBy(name = "custom_radio_even")
     public RadioButtons radio_even;
 
-    @FindBy(css = "input[type=checkbox]")
+    @FindBy(css = "section[id=elements-checklist] input[type=checkbox]")
     public MultiCheckList elements;
 
     @JDropdown(root = "div[ui=dropdown]", value = ".filter-option", list = "li", expand = ".caret")
@@ -27,7 +27,7 @@ public class MetalsColorsForm extends Form<MetalsColors> {
 
     @JDropdown(root = "//div[@ui='droplist']", value = "//button", list = "//li",
             expand = "//*[contains(@class, 'caret')]")
-    DropList vegetables;
+    public DropList vegetables;
 
     @FindBy(id = "submit-button")
     public Button submit;
