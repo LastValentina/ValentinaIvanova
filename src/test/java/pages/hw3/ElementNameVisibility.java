@@ -4,7 +4,7 @@ public class ElementNameVisibility {
     private String name;
     private boolean visible;
 
-    ElementNameVisibility(String name, boolean visible) {
+    public ElementNameVisibility(String name, boolean visible) {
         this.name = name;
         this.visible = visible;
     }
