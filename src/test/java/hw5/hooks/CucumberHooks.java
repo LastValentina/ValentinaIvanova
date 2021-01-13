@@ -1,7 +1,7 @@
 package hw5.hooks;
 
 
-import hw5.WebDriverSingletone;
+import hw5.WebDriverSingleton;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 
@@ -9,12 +9,12 @@ public class CucumberHooks {
 
     @Before
     public void setUp() {
-        WebDriverSingletone.getDriver();
+        WebDriverSingleton.getDriver();
     }
 
     @After
     public void tearDown() {
-        WebDriverSingletone.closeDriver();
+        WebDriverSingleton.closeDriver();
     }
 
 }

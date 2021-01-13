@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Objects;
 
-public class WebDriverSingletone {
+public class WebDriverSingleton {
 
     private static WebDriver driver;
 
-    private WebDriverSingletone() {
+    private WebDriverSingleton() {
     }
 
     public static WebDriver getDriver() {

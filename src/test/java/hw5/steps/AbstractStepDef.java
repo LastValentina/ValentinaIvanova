@@ -1,6 +1,6 @@
 package hw5.steps;
 
-import hw5.WebDriverSingletone;
+import hw5.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import pages.hw3.HomePage;
 import pages.hw3.ServiceElementsPage;
@@ -12,7 +12,7 @@ public class AbstractStepDef {
     ServiceUserTablePage serviceUserTablePage;
 
     protected AbstractStepDef() {
-        WebDriver driver = WebDriverSingletone.getDriver();
+        WebDriver driver = WebDriverSingleton.getDriver();
         homePage = new HomePage(driver);
         serviceElementsPage = new ServiceElementsPage(driver);
         serviceUserTablePage = new ServiceUserTablePage(driver);
