@@ -18,13 +18,14 @@
         <aspectj.version>1.8.10</aspectj.version>
         <allure.version>2.13.7</allure.version>
         <allure-maven.version>2.10.0</allure-maven.version>
+        <cucumber-java.version>6.9.1</cucumber-java.version>
     </properties>
 
     <profiles>
         <profile>
             <id>hw5</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw5/testSuiteCucumber.xml</suite.file>
@@ -33,7 +34,7 @@
         <profile>
             <id>hw4</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw4/testSuiteAllureReport.xml</suite.file>
@@ -137,6 +138,23 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>${selenium.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-cucumber6-jvm</artifactId>
+            <version>${allure.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber-java.version}</version>
         </dependency>
     </dependencies>
 

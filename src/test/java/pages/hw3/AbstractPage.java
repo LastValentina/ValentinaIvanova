@@ -30,4 +30,8 @@ public abstract class AbstractPage {
     protected List<WebElement> waitVisibleElements(List<WebElement> elements) {
         return wait.until(ExpectedConditions.visibilityOfAllElements(elements));
     }
+
+    public String getTitleText() {
+        return driver.getTitle();
+    }
 }
