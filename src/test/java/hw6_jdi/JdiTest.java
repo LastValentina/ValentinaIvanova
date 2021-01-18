@@ -2,10 +2,11 @@ package hw6_jdi;
 
 import com.epam.jdi.light.driver.WebDriverUtils;
 import com.epam.jdi.light.elements.init.PageFactory;
-import hw6_jdi.entities.MetalsColors;
 import hw6_jdi.entities.MetalsColorsJ;
 import hw6_jdi.entities.User;
+import hw6_jdi.enums.Menuitem;
 import hw6_jdi.forms.MetalsColorsForm;
+import hw6_jdi.jdiPages.HeaderSection;
 import hw6_jdi.jdiPages.LeftMenuSection;
 import org.testng.Assert;
 import org.testng.annotations.AfterSuite;
@@ -13,7 +14,6 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static hw6_jdi.JdiSite.*;
 
@@ -28,25 +28,15 @@ public class JdiTest {
     public void MetalsAndColorsPageTest(MetalsColorsJ dataSet) {
         open();
         jdiHomePage.login(User.ROMAN);
-        jdiHomePage.userName.is().text(User.ROMAN.getFullName());  //Assert.assertEquals(getUserName(), User.ROMAN.getFullName());
-        jdiHomePage.headerSection.clickMetalsColorsMenu();
-        jdiMetalsColorsPage.checkOpened();                          //Assert.assertEquals(getTitle(), "Metal and Colors");
-
-        jdiMetalsColorsPage.metalsColorsForm.fillForm(new MetalsColors(dataSet.getRadio1(), dataSet.getRadio2(),
-                dataSet.getElementsAsString(), dataSet.getColor(), dataSet.getMetals(), dataSet.getVegetablesAsString()));
-
-        //Assertion block for selected elements in Metals & Colors Form
-        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_odd.getValue(), dataSet.getRadio1());
-        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_even.getValue(), dataSet.getRadio2());
-        MetalsColorsForm.metal.is().selected(dataSet.getMetals());
-        MetalsColorsForm.color.is().selected(dataSet.getColor());
-        List<String> list = Arrays.asList(dataSet.getElements());
-        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.elements.checked(), list);
-        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.vegetables.selected(), dataSet.getVegetablesAsString());
-
+        jdiHomePage.userName.is().text(User.ROMAN.getFullName());           //Assert.assertEquals(getUserName(), User.ROMAN.getFullName());
+        HeaderSection.headerMenu.select(Menuitem.MetalsColors);
+        jdiMetalsColorsPage.checkOpened();                                  //Assert.assertEquals(getTitle(), "Metal and Colors");
+        jdiMetalsColorsPage.metalsColorsForm.fillForm(dataSet);
         jdiMetalsColorsPage.metalsColorsForm.submit();
-        Assert.assertEquals(jdiMetalsColorsPage.convertResultBlockToClass(),
-                dataSet.convertToResultClass());
+
+        metalsAndColorsFormAssertionStep(dataSet);                          //Assertion block for selected elements in Metals & Colors Form
+        Assert.assertEquals(jdiMetalsColorsPage.checkResultBlock(dataSet),
+                dataSet.convertToResult());
         jdiMetalsColorsPage.headerSection.logout();
     }
 
@@ -86,9 +76,25 @@ public class JdiTest {
     public void leftMenuSectionTest() {
         open();
         jdiHomePage.login(User.ROMAN);
-        LeftMenuSection.leftMenu.select("Metals & Colors");
+        LeftMenuSection.leftMenu.select(Menuitem.MetalsColors);
         jdiMetalsColorsPage.checkOpened();
     }
 
+    @Test(enabled = false)
+    public void headerMenuSectionTest() {
+        open();
+        jdiHomePage.login(User.ROMAN);
+        HeaderSection.headerMenu.select(Menuitem.MetalsColors);
+        jdiMetalsColorsPage.checkOpened();
+    }
+
+    public void metalsAndColorsFormAssertionStep(MetalsColorsJ entity) {
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_odd.getValue(), entity.getRadio_odd());
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.radio_even.getValue(), entity.getRadio_even());
+        MetalsColorsForm.metals.is().selected(entity.getMetals());
+        MetalsColorsForm.color.is().selected(entity.getColor());
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.elements_f.checked(), Arrays.asList(entity.getElements()));
+        Assert.assertEquals(jdiMetalsColorsPage.metalsColorsForm.vegetables_f.selected(), entity.getVegetables_f());
+    }
 }
 

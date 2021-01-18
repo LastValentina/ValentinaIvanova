@@ -1,6 +1,8 @@
 package hw6_jdi.entities;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class MetalsColorsJ {
     private int[] summary;
@@ -8,6 +10,11 @@ public class MetalsColorsJ {
     private String color;
     private String metals;
     private String[] vegetables;
+
+    private String radio_odd;
+    private String radio_even;
+    private String elements_f;
+    private String vegetables_f;
 
     public int[] getSummary() {
         return summary;
@@ -21,7 +28,7 @@ public class MetalsColorsJ {
         return elements;
     }
 
-    public void setElements(String[] elements) {
+    public void setElements_array(String[] elements) {
         this.elements = elements;
     }
 
@@ -49,46 +56,24 @@ public class MetalsColorsJ {
         this.vegetables = vegetables;
     }
 
-    public String getRadio1() {
+    public String getRadio_odd() {
         return Integer.toString(summary[0]);
     }
 
-    public String getRadio2() {
+    public String getRadio_even() {
         return Integer.toString(summary[1]);
+    }
+
+    public String getElements_f() {
+        return String.join(", ", elements);
+    }
+
+    public String getVegetables_f() {
+        return String.join(", ", vegetables);
     }
 
     public int getSum() {
         return summary[0] + summary[1];
-    }
-
-    public String getElementsAsString() {
-        StringBuilder s = new StringBuilder();
-        for (String component : elements) {
-            s.append(component);
-            s.append(", ");
-        }
-        return s.toString().substring(0, s.length() - 2);
-    }
-
-    public String getVegetablesAsString() {
-        StringBuilder s = new StringBuilder();
-        for (String component : vegetables) {
-            s.append(component);
-            s.append(", ");
-        }
-        return s.toString().substring(0, s.length() - 2);
-    }
-
-
-    public MetalsColorsResult convertToResultClass() {
-        MetalsColorsResult result = new MetalsColorsResult();
-        String su = Integer.toString(getSummary()[0] + getSummary()[1]);
-        result.setSummary(su);
-        result.setElements(getElementsAsString());
-        result.setMetals(getMetals());
-        result.setColor(getColor());
-        result.setVegetables(getVegetablesAsString());
-        return result;
     }
 
     @Override
@@ -100,5 +85,15 @@ public class MetalsColorsJ {
                 ", metals='" + metals + '\'' +
                 ", vegetables=" + Arrays.toString(vegetables) +
                 '}';
+    }
+
+    public List<String> convertToResult() {
+        List<String> list = new ArrayList<>();
+        list.add(Integer.toString(getSum()));
+        list.add(getElements_f());
+        list.add(getColor());
+        list.add(getMetals());
+        list.add(getVegetables_f());
+        return list;
     }
 }
