@@ -3,6 +3,7 @@
 /.idea/
 *.iml
 #LodFiles
+debug.log
 *.log
 #Allure
 **/allure-results
