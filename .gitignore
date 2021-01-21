@@ -2,10 +2,10 @@
 # Intellij
 /.idea/
 *.iml
-# Maven
-/target/
 #LodFiles
 *.log
 #Allure
 **/allure-results
 **/.allure
+# Maven
+/target/
