@@ -59,4 +59,41 @@ public class ServiceElementsPage extends AbstractPage {
         return this;
     }
 
+    public void clickCheckBoxByName(String desc) {
+        switch (desc) {
+            case "Water":
+                clickCheckBox(0);
+                break;
+            case "Earth":
+                clickCheckBox(1);
+                break;
+            case "Wind":
+                clickCheckBox(2);
+                break;
+            case "Fire":
+                clickCheckBox(3);
+                break;
+        }
+    }
+
+    public void clickRadioByName(String desc) {
+        switch (desc) {
+            case "Gold":
+                clickRadio(0);
+                break;
+            case "Silver":
+                clickRadio(1);
+                break;
+            case "Bronze":
+                clickRadio(2);
+                break;
+            case "Selen":
+                clickRadio(3);
+                break;
+        }
+    }
+
+
 }
+
+

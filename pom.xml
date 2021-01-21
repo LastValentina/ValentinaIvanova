@@ -48,7 +48,6 @@
             </activation>
             <properties>
                 <suite.file>${project.basedir}/src/test/resources/hw4/testSuiteAllureReport.xml</suite.file>
-                <suite.file>${project.basedir}/src/test/resources/hw6_jdi/jdiTestSuite.xml</suite.file>
             </properties>
         </profile>
         <profile>
