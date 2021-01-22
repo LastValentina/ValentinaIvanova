@@ -465,12 +465,12 @@
         <con:testCase id="b23c0c2c-a04e-4daf-8535-95f45d542639" failOnError="true" failTestCaseOnErrors="true"
                       keepSession="false" maxResults="0" name="ValueWithErrorTestCase" searchProperties="true">
             <con:settings/>
-            <con:testStep type="request" name="checkIncorrecText" id="3d9c26b2-aba9-4048-b673-34ced28d01de">
+            <con:testStep type="request" name="checkIncorrectText" id="3d9c26b2-aba9-4048-b673-34ced28d01de">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                     <con:interface>SpellServiceSoap</con:interface>
                     <con:operation>checkText</con:operation>
-                    <con:request name="checkIncorrecText" id="5ec88f7e-0b99-4ad1-9172-c2600ad8038e">
+                    <con:request name="checkIncorrectText" id="5ec88f7e-0b99-4ad1-9172-c2600ad8038e">
                         <con:settings>
                             <con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
                         </con:settings>
@@ -488,15 +488,7 @@
                         <con:assertion type="Simple Contains" id="15fd5a26-d011-4041-8c72-0850147921c7"
                                        name="Contains errorCode1">
                             <con:configuration>
-                                <token>error code="1"</token>
-                                <ignoreCase>false</ignoreCase>
-                                <useRegEx>false</useRegEx>
-                            </con:configuration>
-                        </con:assertion>
-                        <con:assertion type="Simple Contains" id="d02423d7-abe3-42c9-951c-7f029d1356c7"
-                                       name="ContainsIncorrectWord">
-                            <con:configuration>
-                                <token>${#TestCase#wrongWord}</token>
+                                <token>${#TestSuite#errorUnknownWord}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -506,22 +498,9 @@
                             <con:configuration>
                                 <path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
                                     declare namespace ns1='http://speller.yandex.net/services/spellservice';
-
                                     //ns1:word
                                 </path>
                                 <content>${#TestCase#wrongWord}</content>
-                                <allowWildcards>false</allowWildcards>
-                                <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
-                                <ignoreComments>false</ignoreComments>
-                            </con:configuration>
-                        </con:assertion>
-                        <con:assertion type="XPath Match" id="b6b7fed8-3fc9-4817-ba3a-f742132678e2" name="XPath Match">
-                            <con:configuration>
-                                <path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
-                                    declare namespace ns1='http://speller.yandex.net/services/spellservice';
-                                    //ns1:s
-                                </path>
-                                <content>solution</content>
                                 <allowWildcards>false</allowWildcards>
                                 <ignoreNamspaceDifferences>false</ignoreNamspaceDifferences>
                                 <ignoreComments>false</ignoreComments>
@@ -531,6 +510,23 @@
                                        name="Valid HTTP Status Codes">
                             <con:configuration>
                                 <codes>200</codes>
+                            </con:configuration>
+                        </con:assertion>
+                        <con:assertion type="GroovyScriptAssertion" id="6eceba41-cea6-479c-90f0-2112ae6953bf"
+                                       name="ScriptAssertionExpectedWordFromResponse">
+                            <con:configuration>
+                                <scriptText>import com.eviware.soapui.support.XmlHolder
+                                    def resp = new XmlHolder( messageExchange.responseContentAsXml )
+                                    def req = new XmlHolder( messageExchange.requestContentAsXml )
+
+                                    def result= (resp.getNodeValues('//ns1:s'))
+                                    def counterExpectedWord=0
+                                    result.each{
+                                    if (it==context.expand( '${#TestCase#expectedWord}' )) {
+                                    counterExpectedWord++}
+                                    }
+                                    assert counterExpectedWord == 1
+                                </scriptText>
                             </con:configuration>
                         </con:assertion>
                         <con:credentials>
@@ -545,6 +541,7 @@
             </con:testStep>
             <con:setupScript>testRunner.testCase.setPropertyValue("incorrectValue", "There is not one soluti")
                 testRunner.testCase.setPropertyValue("wrongWord", "soluti")
+                testRunner.testCase.setPropertyValue("expectedWord", "solution")
             </con:setupScript>
             <con:properties>
                 <con:property>
@@ -557,6 +554,10 @@
                 <con:property>
                     <con:name>wrongWord</con:name>
                     <con:value>soluti</con:value>
+                </con:property>
+                <con:property>
+                    <con:name>expectedWord</con:name>
+                    <con:value>solution</con:value>
                 </con:property>
             </con:properties>
         </con:testCase>
@@ -582,18 +583,10 @@
       </spel:CheckTextRequest>\r
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request>
-                        <con:assertion type="SOAP Response" id="009e9520-0f22-42c2-b0c1-945650d6a329"/>
-                        <con:assertion type="Simple Contains" id="15fd5a26-d011-4041-8c72-0850147921c7" name="Contains">
+                        <con:assertion type="Simple Contains" id="15fd5a26-d011-4041-8c72-0850147921c7"
+                                       name="ContainsErrorCode1">
                             <con:configuration>
-                                <token>error code="1"</token>
-                                <ignoreCase>false</ignoreCase>
-                                <useRegEx>false</useRegEx>
-                            </con:configuration>
-                        </con:assertion>
-                        <con:assertion type="Simple Contains" id="d02423d7-abe3-42c9-951c-7f029d1356c7"
-                                       name="ContainsIncorrectWord">
-                            <con:configuration>
-                                <token>${#TestCase#incorrectValue}</token>
+                                <token>${#TestSuite#errorUnknownWord}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -603,7 +596,6 @@
                             <con:configuration>
                                 <path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
                                     declare namespace ns1='http://speller.yandex.net/services/spellservice';
-
                                     //ns1:word
                                 </path>
                                 <content>${#TestCase#incorrectValue}</content>
@@ -616,7 +608,6 @@
                             <con:configuration>
                                 <path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
                                     declare namespace ns1='http://speller.yandex.net/services/spellservice';
-
                                     //ns1:s[1]
                                 </path>
                                 <content>revolution</content>
@@ -735,9 +726,10 @@
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request>
                         <con:assertion type="SOAP Response" id="e3e65cc9-a1cc-41c4-bbbe-9209035dca76"/>
-                        <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc" name="Contains">
+                        <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc"
+                                       name="ContainsErrorCode2">
                             <con:configuration>
-                                <token>error code="2"</token>
+                                <token>${#TestSuite#errorRepeadWord}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -806,7 +798,7 @@
                         <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc"
                                        name="ContainsErrorCode1">
                             <con:configuration>
-                                <token>error code="1"</token>
+                                <token>${#TestSuite#errorUnknownWord}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -834,10 +826,15 @@
                                     def result= (resp.getNodeValues('//ns1:word'))
                                     def result2= (resp.getNodeValue('//ns1:word'))
 
-                                    assert result == ["many", "consolati", "haVe"]
+                                    //assert result == ["many", "consolati", "haVe"]
                                     //assert
                                     result==[testRunner.testCase.getPropertyValue("doubleWord"),testRunner.testCase.getPropertyValue("wrongWord"),testRunner.testCase.getPropertyValue("wrongCase")]
-                                    assert result2=="many"
+                                    def er1=context.expand( '${#TestCase#doubleWord}' )
+                                    def er2=context.expand( '${#TestCase#wrongWord}' )
+                                    def er3=context.expand( '${#TestCase#wrongCase}' )
+                                    def erAll=[er1,er2,er3]
+                                    assert result==erAll
+                                    assert result2==er1
 
 
                                 </scriptText>
@@ -859,7 +856,7 @@
                         <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc"
                                        name="ContainsErrorCode2">
                             <con:configuration>
-                                <token>error code="2"</token>
+                                <token>${#TestSuite#errorRepeadWord}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -867,7 +864,7 @@
                         <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc"
                                        name="ContainsErrorCode3">
                             <con:configuration>
-                                <token>error code="3"</token>
+                                <token>${#TestSuite#errorCapitalization}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
@@ -932,15 +929,16 @@
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request>
                         <con:assertion type="SOAP Response" id="e3e65cc9-a1cc-41c4-bbbe-9209035dca76"/>
-                        <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc" name="Contains">
+                        <con:assertion type="Simple Contains" id="d5f5a855-6f43-4bc5-9ef6-3093bd3103cc"
+                                       name="ContainsErrorCode3">
                             <con:configuration>
-                                <token>error code="3"</token>
+                                <token>${#TestSuite#errorCapitalization}</token>
                                 <ignoreCase>false</ignoreCase>
                                 <useRegEx>false</useRegEx>
                             </con:configuration>
                         </con:assertion>
                         <con:assertion type="XPath Match" id="096c6f31-eeca-4456-a758-3b07ec807ad2"
-                                       name="XPathMatchDoubleWord">
+                                       name="XPathMatchWrongCaseWord">
                             <con:configuration>
                                 <path>declare namespace soap='http://schemas.xmlsoap.org/soap/envelope/';
                                     declare namespace ns1='http://speller.yandex.net/services/spellservice';
@@ -987,6 +985,18 @@
                 <con:name>lang</con:name>
                 <con:value>"en, ru"</con:value>
             </con:property>
+            <con:property>
+                <con:name>errorUnknownWord</con:name>
+                <con:value>code="1"</con:value>
+            </con:property>
+            <con:property>
+                <con:name>errorRepeadWord</con:name>
+                <con:value>code="2"</con:value>
+            </con:property>
+            <con:property>
+                <con:name>errorCapitalization</con:name>
+                <con:value>code="3"</con:value>
+            </con:property>
         </con:properties>
         <con:setupScript/>
         <con:tearDownScript>for ( testCaseResult in runner.results )
@@ -1007,29 +1017,18 @@
         <con:settings/>
         <con:runType>SEQUENTIAL</con:runType>
         <con:testCase id="b96e8f2a-53a7-4522-ae11-cf0151d7e52b" failOnError="true" failTestCaseOnErrors="true"
-                      keepSession="false" maxResults="0" name="receivingFromDataProviderTestCase"
-                      searchProperties="true">
-            <con:settings/>
-            <con:testStep type="groovy" name="readingDataAndCheckTextGroovy Script"
-                          id="4cf5c2a0-b5aa-4e1a-9e34-341bb3877a73">
-                <con:settings/>
-                <con:config>
-                    <script>def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
-                        def projectPath = groovyUtils.projectPath
-                        //def directoryName = projectPath + "/testData"
-                        def file = new File (projectPath + "/DataForTestSoap.csv")
-                        //log.info file
-                        context.fileReader=new BufferedReader(new FileReader(file))
-                        data = context.fileReader.readLines()
-                        for (int i=0;i&lt;data.size();i++){
-                        testRunner.testCase.setPropertyValue("valuePositive", data[i])
-                        log.info testRunner.testCase.getPropertyValue("valuePositive")
-                        testRunner.runTestStepByName("checkTextWithData")
-                        }
-                    </script>
-                </con:config>
-            </con:testStep>
-            <con:testStep type="request" name="checkTextWithData" id="6de1c89c-7db7-4d11-9ae2-967b088f6b1f">
+                      keepSession="false" maxResults="0" name="CheckLinesByOneTestCase" searchProperties="true"
+                      timeout="0" wsrmEnabled="false" wsrmVersion="1.0" wsrmAckTo="" amfAuthorisation="false"
+                      amfEndpoint="" amfLogin="" amfPassword="">
+            <con:settings>
+                <con:setting id="com.eviware.soapui.impl.wsdl.panels.testcase.JTestRunLog$OptionsForm@max_rows">1000
+                </con:setting>
+                <con:setting id="com.eviware.soapui.impl.wsdl.panels.testcase.JTestRunLog$OptionsForm@errors_only">
+                    false
+                </con:setting>
+            </con:settings>
+            <con:testStep type="request" name="checkTextWithData" id="6de1c89c-7db7-4d11-9ae2-967b088f6b1f"
+                          disabled="true">
                 <con:settings/>
                 <con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
                     <con:interface>SpellServiceSoap</con:interface>
@@ -1048,13 +1047,10 @@
       </spel:CheckTextRequest>\r
    </soapenv:Body>\r
 </soapenv:Envelope>]]></con:request>
-                        <con:assertion type="SOAP Response" id="10cb8bfe-006a-465e-83aa-d06954225180"/>
-                        <con:assertion type="Simple NotContains" id="0dcbbc73-664e-45aa-9c36-2446e68bcb33"
-                                       name="Not Contains">
+                        <con:assertion type="Valid HTTP Status Codes" id="abee0b54-8e39-41e4-89cd-270fd7a9cf28"
+                                       name="Valid HTTP Status Codes">
                             <con:configuration>
-                                <token>error</token>
-                                <ignoreCase>false</ignoreCase>
-                                <useRegEx>false</useRegEx>
+                                <codes>200</codes>
                             </con:configuration>
                         </con:assertion>
                         <con:credentials>
@@ -1067,10 +1063,70 @@
                     </con:request>
                 </con:config>
             </con:testStep>
+            <con:testStep type="transfer" name="tempPropertyTransfer" id="88d34693-f44e-49e6-855e-b77e098f3173"
+                          disabled="true">
+                <con:settings/>
+                <con:config xsi:type="con:PropertyTransfersStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+                    <con:transfers setNullOnMissingSource="true" transferTextContent="true" failOnError="true"
+                                   ignoreEmpty="false" transferToAll="false" entitize="false"
+                                   transferChildNodes="false">
+                        <con:name>wordResponse</con:name>
+                        <con:sourceType>Response</con:sourceType>
+                        <con:sourceStep>checkTextWithData</con:sourceStep>
+                        <con:sourcePath>//*:word[1]</con:sourcePath>
+                        <con:targetType>temp</con:targetType>
+                        <con:targetStep>#TestCase#</con:targetStep>
+                        <con:upgraded>true</con:upgraded>
+                    </con:transfers>
+                </con:config>
+            </con:testStep>
+            <con:testStep type="groovy" name="readingDataAndCheckTextGroovy Script"
+                          id="4cf5c2a0-b5aa-4e1a-9e34-341bb3877a73">
+                <con:settings/>
+                <con:config>
+                    <script>
+                        def groovyUtils = new com.eviware.soapui.support.GroovyUtils(context)
+                        def projectPath = groovyUtils.projectPath
+                        //def directoryName = projectPath + "/testData"
+                        def file = new File (projectPath + "/DataForTestSoap.csv")
+                        def fileReport = new File (projectPath + "/TestCaseReport.csv")
+                        //log.info file
+                        date=new Date().format("yyyy-MM-dd'T'HH:mm:ss SSS")
+                        fileReport.append("=====New Test Run=========" +date+ "\n")
+                        context.fileReader=new BufferedReader(new FileReader(file))
+                        data = context.fileReader.readLines()
+                        for (int i=0;i&lt;data.size();i++){
+                        testRunner.testCase.setPropertyValue("valuePositive", data[i])
+                        // log.info testRunner.testCase.getPropertyValue("valuePositive")
+                        testRunner.runTestStepByName("checkTextWithData")
+                        testRunner.runTestStepByName("tempPropertyTransfer")
+                        result=testRunner.testCase.getPropertyValue("temp")
+
+                        //Comparing the value to print 'Pass' or 'Fail'
+                        if(result==null)
+                        { log.info "Step passed for line: "+testRunner.testCase.getPropertyValue("valuePositive")
+                        fileReport.append ("Step passed for line:
+                        "+testRunner.testCase.getPropertyValue("valuePositive")+ "\n")
+                        }
+                        else
+                        { log.info "Step failed for line: "+testRunner.testCase.getPropertyValue("valuePositive")}
+                        fileReport.append ("Step failed for line:
+                        "+testRunner.testCase.getPropertyValue("valuePositive")+ "\n")
+                        }
+                    </script>
+                </con:config>
+            </con:testStep>
+            <con:tearDownScript>testRunner.testCase.setPropertyValue("valuePositive", "")
+                testRunner.testCase.setPropertyValue("temp", "")
+            </con:tearDownScript>
             <con:properties>
                 <con:property>
                     <con:name>valuePositive</con:name>
-                    <con:value>revoluti</con:value>
+                    <con:value/>
+                </con:property>
+                <con:property>
+                    <con:name>temp</con:name>
+                    <con:value/>
                 </con:property>
             </con:properties>
         </con:testCase>
@@ -1086,4 +1142,5 @@
     <con:wssContainer/>
     <con:oAuth2ProfileContainer/>
     <con:oAuth1ProfileContainer/>
+    <con:sensitiveInformation/>
 </con:soapui-project>
