@@ -1,34 +1,24 @@
 package hw8.functional_level;
 
 import hw8.TextDataProvider;
-import hw8.service.CheckTextAssertions;
+import hw8.assertions.CheckTextAssertions;
+import hw8.dto.CheckTextDto;
 import hw8.service.CheckTextService;
-import hw8.service.ResponseParser;
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import static hw8.dto.Const.*;
 
 public class WrongWordCorrectionTest {
     CheckTextService cts = new CheckTextService();
-    ResponseParser rp = new ResponseParser();
     CheckTextAssertions ta;
-    Map<String, Object> params;
+    CheckTextDto[] correctedResult;
 
     @Test(description = "check if provided words don't contain errors",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
     public void checkTextTest(String textId, String value, String langData, int errorQty, String[] error) {
-        params = new HashMap<>();
-        params.put(parametr_text, value);
-        params.put(parametr_lang, lang_en_ru);
         if (errorQty > 0) {
-            String providedWord = rp.getProvidedWords(cts.getWithParams(params)).get(0);
-            System.out.println(providedWord);
-            params.clear();
-            params.put(parametr_text, providedWord);
-            ta = new CheckTextAssertions(rp.getDataFromResponse(cts.getWithParams(params))).verifyQtyErrors(0);
+            String providedWord = cts.getCheckText(value)[0].getS().get(0);
+            //then check the first returned variant from node "S"
+            correctedResult = cts.getCheckText(providedWord);
+            ta = new CheckTextAssertions(correctedResult).checkNumberOfErrors(0);
         }
     }
 }

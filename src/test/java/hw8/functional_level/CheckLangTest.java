@@ -1,47 +1,46 @@
 package hw8.functional_level;
 
 import hw8.TextDataProvider;
-import hw8.service.CheckTextAssertions;
+import hw8.assertions.CheckTextAssertions;
+import hw8.dto.CheckTextDto;
 import hw8.service.CheckTextService;
-import hw8.service.ResponseParser;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import static hw8.dto.Const.*;
+import static hw8.dto.Const.LANG_EN;
+import static hw8.dto.Const.LANG_RU;
 
 public class CheckLangTest {
     CheckTextService cts = new CheckTextService();
-    ResponseParser rp = new ResponseParser();
     CheckTextAssertions ta;
-    Map<String, Object> params;
+    CheckTextDto[] result;
 
     @Test(description = "language test",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
     public void checkTextTest(String textId, String value, String langData, int errorQty, String[] error) {
-        // for en - language
-        String usedLang = lang_en;
-        params = new HashMap<>();
-        params.put(parametr_text, value);
-        params.put(parametr_lang, usedLang);
-        if (usedLang.contains(langData)) {
-            ta = new CheckTextAssertions(rp.getDataFromResponse(cts.getWithParams(params))).verifyQtyErrors(errorQty);
+        // for en - language (LANG_EN)
+        result = cts.getCheckTextWithLang(value, LANG_EN);
+        if (LANG_EN.contains(langData)) {
+            ta = new CheckTextAssertions(result).checkNumberOfErrors(errorQty);
         } else {
-            ta = new CheckTextAssertions(rp.getDataFromResponse(cts.getWithParams(params))).verifyQtyErrors(0);
+            ta = new CheckTextAssertions(result).checkNumberOfErrors(0);
         }
 
-        // for ru - language
-        usedLang = lang_ru;
-        params = new HashMap<>();
-        params.put(parametr_text, value);
-        params.put(parametr_lang, usedLang);
-        if (usedLang.contains(langData)) {
-            ta = new CheckTextAssertions(rp.getDataFromResponse(cts.getWithParams(params))).verifyQtyErrors(errorQty);
+        // for ru - language (LANG_RU)
+        result = cts.getCheckTextWithLang(value, LANG_RU);
+        if (LANG_RU.contains(langData)) {
+            ta = new CheckTextAssertions(result).checkNumberOfErrors(errorQty);
         } else {
-            ta = new CheckTextAssertions(rp.getDataFromResponse(cts.getWithParams(params))).verifyQtyErrors(0);
+            ta = new CheckTextAssertions(result).checkNumberOfErrors(0);
         }
     }
+
+
+
+
+
+
+
+
 
 }
 

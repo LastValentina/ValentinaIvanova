@@ -9,7 +9,7 @@ import lombok.SneakyThrows;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResponseParser {
+public class ResponseParserOLD {
     @SneakyThrows
     public List<CheckTextDto> getDataFromResponse(Response response) {
         ObjectMapper objectMapper = new ObjectMapper();

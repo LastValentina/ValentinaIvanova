@@ -1,16 +1,22 @@
 package hw8.dto;
 
 public class Const {
-    public final static String parametr_text = "text";
-    public final static String parametr_lang = "lang";
-    public final static String parametr_options = "options";
-    public final static String parametr_format = "format";
-    public final static String lang_en = "en";
-    public final static String lang_ru = "ru";
-    public final static String lang_en_ru = "en,ru";
-    public final static String lang_ru_en = "ru,en";
-    public final static int code_unknown = 1;
-    public final static int code_repeat = 2;
-    public final static int code_case = 3;
+    public final static String PARAMETR_TEXT = "text";
+    public final static String PARAMETR_LANG = "lang";
+    public final static String PARAMETR_OPTIONS = "options";
+    public final static String PARAMETR_FORMAT = "format";
+    public final static String LANG_EN = "en";
+    public final static String LANG_RU = "ru";
+    public final static String LANG_EN_RU = "en,ru";
+    public final static String LANG_RU_EN = "ru,en";
+    public final static int CODE_UNKNOWN = 1;
+    public final static int CODE_REPEAT = 2;
+    public final static int CODE_CASE = 3;
     public final static int FIND_REPEAT_WORDS = 8;
+
+    public static final String HTTP_GET = "get";
+    public static final String HTTP_POST = "post";
+    public static final String HTTP_DELETE = "delete";
+    public static final String HTTP_PUT = "put";
+    public static final String HTTP_PATCH = "patch";
 }

@@ -1,52 +1,46 @@
 package hw8.service;
 
-import io.restassured.RestAssured;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.filter.log.RequestLoggingFilter;
-import io.restassured.filter.log.ResponseLoggingFilter;
+import hw8.dto.CheckTextDto;
 import io.restassured.response.Response;
-import io.restassured.specification.RequestSpecification;
-import lombok.SneakyThrows;
-import org.hamcrest.Matchers;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
-import static org.apache.http.HttpStatus.SC_MULTIPLE_CHOICES;
-import static org.apache.http.HttpStatus.SC_OK;
+import static hw8.dto.Const.*;
 
-public class CheckTextService {
-    private RequestSpecification specification;
+public class CheckTextService extends CommonService {
+    String uriText = new ServiceUrl().getServiceUrl();
+//    ServiceUrl su=new ServiceUrl();
+    //   String uriTexts=su.getBaseUrl()+su.getEpTexts();
 
-    public CheckTextService() {
-        RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-        specification = new RequestSpecBuilder()
-                .setBaseUri(getProperties().getProperty("service.uri"))
-                .addFilter(new RequestLoggingFilter())
-                .addFilter(new ResponseLoggingFilter())
-                .build();
+
+    public CheckTextDto[] getCheckText(String text) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(PARAMETR_TEXT, text);
+        return new CommonService().getWithParams(uriText, params)
+                .getBody().as(CheckTextDto[].class);
     }
 
-    @SneakyThrows
-    public Properties getProperties() {
-        Properties properties = new Properties();
-        String fileName = "hw8/test.properties";
-        properties.load(getClass().getClassLoader().getResourceAsStream(fileName));
-        return properties;
+    public CheckTextDto[] getCheckTextWithLang(String text, String lang) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(PARAMETR_LANG, lang);
+        params.put(PARAMETR_TEXT, text);
+        return new CommonService().getWithParams(uriText, params)
+                .getBody().as(CheckTextDto[].class);
     }
 
-    public Response getNoParams() {
-        Response response = RestAssured.given(specification).get(getProperties().getProperty("service.uri"));
-        response.then()
-                .statusCode(Matchers.lessThan(SC_MULTIPLE_CHOICES))
-                .statusCode(Matchers.greaterThanOrEqualTo(SC_OK));
-        return response;
+    public CheckTextDto[] getCheckTextWithLangOptions(String text, String lang, String options) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(PARAMETR_LANG, lang);
+        params.put(PARAMETR_OPTIONS, options);
+        params.put(PARAMETR_TEXT, text);
+        return new CommonService().getWithParams(uriText, params)
+                .getBody().as(CheckTextDto[].class);
     }
 
-    public Response getWithParams(Map<String, Object> params) {
-        RequestSpecification specification = RestAssured.given(this.specification);
-        for (Map.Entry<String, Object> param : params.entrySet())
-            specification.param(param.getKey(), param.getValue());
-        return specification.get(getProperties().getProperty("service.uri"));
+    public Response getResponseByMethod(String text, String method) {
+        Map<String, String> params = new HashMap<>();
+        params.put(PARAMETR_TEXT, text);
+        return new CommonService().getURL(method, uriText, params);
     }
 }
