@@ -36,25 +36,9 @@ public class CommonService {
     }
 
     public Response getWithParams(String uri, Map<String, Object> params) {
-        //      RequestSpecification specification = RestAssured.given(specification);
-        //       RestAssured.given(specification);
-//        for (Map.Entry<String, Object> param : params.entrySet())
-//        {  specification.param(param.getKey(), param.getValue());}
-        //       return specification.get(uri);
         specification.queryParams(params);
         return RestAssured.given(specification).get(uri);
     }
-
-    //   public Response getWithParams(String uri, Map<String, Object> mainParams, Map<String, Object> params) {
-    //             RequestSpecification specification = RestAssured.given(specification);
-    //              RestAssured.given(specification);
-    //       for (Map.Entry<String, Object> param : params.entrySet())
-    //       {  specification.param(param.getKey(), param.getValue());}
-    //              return specification.get(uri);
-    //       specification.queryParams(mainParams);
-    //       specification.requestParams();
-    //       return RestAssured.given(specification).get(uri);
-    //   }
 
 
     public Response getURL(String method, String uri, Map<String, String> params) {

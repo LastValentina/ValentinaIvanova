@@ -10,9 +10,6 @@ import static hw8.dto.Const.*;
 
 public class CheckTextService extends CommonService {
     String uriText = new ServiceUrl().getServiceUrl();
-//    ServiceUrl su=new ServiceUrl();
-    //   String uriTexts=su.getBaseUrl()+su.getEpTexts();
-
 
     public CheckTextDto[] getCheckText(String text) {
         Map<String, Object> params = new HashMap<>();
