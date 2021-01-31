@@ -3,12 +3,13 @@ package hw8;
 import org.testng.annotations.DataProvider;
 
 import static hw8.dto.Const.*;
+import static javax.ws.rs.HttpMethod.*;
 import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class TextDataProvider {
 
-    @org.testng.annotations.DataProvider
+    @DataProvider
     public Object[][] textAndErrorsData() {
         return new Object[][]{
                 {"t_1", "There are too many questaons", 1, "questaons"},
@@ -51,14 +52,28 @@ public class TextDataProvider {
     @DataProvider
     public Object[][] httpMethodsData() {
         return new Object[][]{
-                {HTTP_GET, SC_OK, "questaons"},
-                {HTTP_POST, SC_OK, "questaons"},
-                {HTTP_PUT, SC_METHOD_NOT_ALLOWED, "questaons"},
-                {HTTP_DELETE, SC_METHOD_NOT_ALLOWED, "questaons"},
-                {HTTP_PATCH, SC_METHOD_NOT_ALLOWED, "questaons"},
+                {GET, SC_OK, "questaons"},
+                {POST, SC_OK, "questaons"},
+                {PUT, SC_METHOD_NOT_ALLOWED, "questaons"},
+                {DELETE, SC_METHOD_NOT_ALLOWED, "questaons"},
+                {PATCH, SC_METHOD_NOT_ALLOWED, "questaons"},
         };
     }
 
+    @DataProvider
+    public Object[][] textsData() {
+        return new Object[][]{
+                {"t_17", 2, "There are too many questaons", "There is not one soluti"},
+                {"t_18", 0, "There is no resurrection", "There is so much confusion"},
+        };
+    }
 
+    @DataProvider
+    public Object[][] textErrorsData() {
+        return new Object[][]{
+                {"t_19", "There are too many questaons", 1, "questaons"},
+                {"t_20", "Ther is so muuch confusion", 2, "Ther", "muuch"},
+        };
+    }
 }
 

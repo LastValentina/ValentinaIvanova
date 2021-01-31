@@ -2,7 +2,6 @@ package hw8.functional_level;
 
 import hw8.TextDataProvider;
 import hw8.assertions.CheckTextAssertions;
-import hw8.dto.CheckTextDto;
 import hw8.service.CheckTextService;
 import org.testng.annotations.Test;
 
@@ -10,26 +9,25 @@ import java.util.Arrays;
 
 public class CheckTextMethodTest {
 
-    CheckTextService checkTextService = new CheckTextService();
-    CheckTextAssertions textAssertions;
-    CheckTextDto[] result;
-
-    @Test(description = "check incorrect words and number of errors",
+    @Test(description = "check number of errors into text",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsData")
+    public void checkNumberOfErrorsIntoTextTest(String textId, String value, int errorQty, String[] error) {
+        new CheckTextAssertions(new CheckTextService().getCheckText(value))
+                .checkNumberOfErrors(errorQty);
+    }
+
+    @Test(description = "check incorrect words into text (Nodes 'word')",
+            dataProviderClass = TextDataProvider.class, dataProvider = "textErrorsData")
     public void checkTextTest(String textId, String value, int errorQty, String[] error) {
 
-        result = checkTextService.getCheckText(value);
-        if (errorQty == 0) {
-            textAssertions = new CheckTextAssertions(result).checkNumberOfErrors(errorQty);
-        } else {
-            textAssertions = new CheckTextAssertions(result)
-                    .checkReturnedWordsIntoResponse(Arrays.asList(error));
-        }
+        new CheckTextAssertions(new CheckTextService().getCheckText(value))
+                .checkReturnedWordsIntoResponse(Arrays.asList(error));
     }
+
 
     @Test(enabled = false, dataProviderClass = hw8.TextDataProvider.class, dataProvider = "wrongWordData")
     public void checkTextWithErrorTest(String id, String value) {
-        textAssertions = new CheckTextAssertions(checkTextService.getCheckText(value))
+        new CheckTextAssertions(new CheckTextService().getCheckText(value))
                 .checkReturnedWordsIntoResponse(value);
     }
 

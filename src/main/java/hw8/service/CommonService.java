@@ -10,13 +10,12 @@ import org.hamcrest.Matchers;
 
 import java.util.Map;
 
-import static hw8.dto.Const.*;
 import static org.apache.http.HttpStatus.SC_MULTIPLE_CHOICES;
 import static org.apache.http.HttpStatus.SC_OK;
 
 public class CommonService {
     static String basedUri = new ServiceUrl().getBaseUrl();
-    private RequestSpecification specification;
+    protected RequestSpecification specification;
 
     public CommonService() {
         RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
@@ -38,30 +37,6 @@ public class CommonService {
     public Response getWithParams(String uri, Map<String, Object> params) {
         specification.queryParams(params);
         return RestAssured.given(specification).get(uri);
-    }
-
-
-    public Response getURL(String method, String uri, Map<String, String> params) {
-        Response response = null;
-        specification.queryParams(params);
-        switch (method) {
-            case HTTP_GET:
-                response = RestAssured.given(specification).get(uri);
-                break;
-            case HTTP_POST:
-                response = RestAssured.given(specification).post(uri);
-                break;
-            case HTTP_PUT:
-                response = RestAssured.given(specification).put(uri);
-                break;
-            case HTTP_DELETE:
-                response = RestAssured.given(specification).delete(uri);
-                break;
-            case HTTP_PATCH:
-                response = RestAssured.given(specification).patch(uri);
-                break;
-        }
-        return response;
     }
 
 }

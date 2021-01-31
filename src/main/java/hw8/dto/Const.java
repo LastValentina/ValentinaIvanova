@@ -14,9 +14,4 @@ public class Const {
     public final static int CODE_CASE = 3;
     public final static int FIND_REPEAT_WORDS = 8;
 
-    public static final String HTTP_GET = "get";
-    public static final String HTTP_POST = "post";
-    public static final String HTTP_DELETE = "delete";
-    public static final String HTTP_PUT = "put";
-    public static final String HTTP_PATCH = "patch";
 }
