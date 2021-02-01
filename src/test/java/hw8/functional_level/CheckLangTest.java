@@ -10,26 +10,20 @@ import static hw8.dto.Const.LANG_RU;
 
 public class CheckLangTest {
 
-    @Test(description = "test for option lang='En' with taking in consideration initial language of text",
+    @Test(description = "test for option lang='En' with text on English",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
     public void checkEnTextTest(String textId, String value, String langData, int errorQty, String[] error) {
-        if (!LANG_EN.contains(langData)) {
-            errorQty = 0;
-        }
 
         new CheckTextAssertions(new CheckTextService().getCheckTextWithLang(value, LANG_EN))
                 .checkNumberOfErrors(errorQty);
     }
 
-    @Test(description = "test for option='Ru' with taking in consideration initial language of text",
+    @Test(description = "test for option='Ru' with text on English",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
     public void checkRuTextTest(String textId, String value, String langData, int errorQty, String[] error) {
-        if (!LANG_RU.contains(langData)) {
-            errorQty = 0;
-        }
 
         new CheckTextAssertions(new CheckTextService().getCheckTextWithLang(value, LANG_RU))
-                .checkNumberOfErrors(errorQty);
+                .checkNumberOfErrors(0);
     }
 
 }

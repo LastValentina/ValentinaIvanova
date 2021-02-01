@@ -31,9 +31,7 @@ public class TextDataProvider {
     public Object[][] textAndErrorsAndLangData() {
         return new Object[][]{
                 {"t_7", "There are too many questaons", LANG_EN, 1, "questaons"},
-                {"t_8", "There is not one solution", LANG_EN, 0, null},
-                {"t_9", "по полю гуляет коттт и поет", LANG_RU, 1, "коттт"},
-                {"t_10", "Ther is so muuch confusion", LANG_EN, 2, "Ther", "muuch"},
+                {"t_8", "Ther is so muuch confusion", LANG_EN, 2, "Ther", "muuch"},
         };
     }
 
@@ -63,7 +61,7 @@ public class TextDataProvider {
     @DataProvider
     public Object[][] textsData() {
         return new Object[][]{
-                {"t_17", 2, "There are too many questaons", "There is not one soluti"},
+                {"t_17", 2, "too many questaons", "There is not one soluti"},
                 {"t_18", 0, "There is no resurrection", "There is so much confusion"},
         };
     }
@@ -75,5 +73,6 @@ public class TextDataProvider {
                 {"t_20", "Ther is so muuch confusion", 2, "Ther", "muuch"},
         };
     }
+
 }
 

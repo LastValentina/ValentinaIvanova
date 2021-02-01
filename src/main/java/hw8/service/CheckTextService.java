@@ -1,7 +1,6 @@
 package hw8.service;
 
 import hw8.dto.CheckTextDto;
-import hw8.dto.ListOfCheckTextDto;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
@@ -35,11 +34,11 @@ public class CheckTextService extends CommonService {
         return this.getWithParams(su.getEpText(), params).getBody().as(CheckTextDto[].class);
     }
 
-    public ListOfCheckTextDto[] getCheckTexts(String[] text) {
+    public CheckTextDto[][] getCheckTexts(String[] text) {
         Map<String, Object> params = new HashMap<>();
         params.put(PARAMETR_TEXT, text);
         Response response = this.getWithParams(su.getEpTexts(), params);
-        return response.getBody().as(ListOfCheckTextDto[].class);
+        return response.getBody().as(CheckTextDto[][].class);
     }
 
     public String getResponseBody(String[] text) {
@@ -53,7 +52,6 @@ public class CheckTextService extends CommonService {
         params.put(PARAMETR_TEXT, text);
         return this.getWithParams(su.getEpText(), params).getBody().asString();
     }
-
 
     public Response getResponseByMethod(String text, String method) {
         Map<String, String> params = new HashMap<>();
