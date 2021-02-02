@@ -14,6 +14,5 @@ public class CheckTextsMethodTest {
         new CheckTextsAssertions(new CheckTextService().getCheckTexts(value))
                 .checkNumberOfErrors(errorQty);
     }
-
 }
 

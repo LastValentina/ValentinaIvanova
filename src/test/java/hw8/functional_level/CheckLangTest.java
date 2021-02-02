@@ -12,7 +12,7 @@ public class CheckLangTest {
 
     @Test(description = "test for option lang='En' with text on English",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
-    public void checkEnTextTest(String textId, String value, String langData, int errorQty, String[] error) {
+    public void checkEnTextTest(String textId, String value, String langData, int errorQty) {
 
         new CheckTextAssertions(new CheckTextService().getCheckTextWithLang(value, LANG_EN))
                 .checkNumberOfErrors(errorQty);
@@ -20,12 +20,11 @@ public class CheckLangTest {
 
     @Test(description = "test for option='Ru' with text on English",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorsAndLangData")
-    public void checkRuTextTest(String textId, String value, String langData, int errorQty, String[] error) {
+    public void checkRuTextTest(String textId, String value, String langData, int errorQty) {
 
         new CheckTextAssertions(new CheckTextService().getCheckTextWithLang(value, LANG_RU))
                 .checkNumberOfErrors(0);
     }
-
 }
 
 

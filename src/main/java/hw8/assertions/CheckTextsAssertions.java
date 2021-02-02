@@ -34,6 +34,4 @@ public class CheckTextsAssertions {
         Assert.assertEquals(word.size(), qty, Messages.MES_WRONG_SIZE);
         return this;
     }
-
-
 }

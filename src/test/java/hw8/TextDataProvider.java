@@ -3,9 +3,6 @@ package hw8;
 import org.testng.annotations.DataProvider;
 
 import static hw8.dto.Const.*;
-import static javax.ws.rs.HttpMethod.*;
-import static org.apache.http.HttpStatus.SC_METHOD_NOT_ALLOWED;
-import static org.apache.http.HttpStatus.SC_OK;
 
 public class TextDataProvider {
 
@@ -30,31 +27,20 @@ public class TextDataProvider {
     @DataProvider
     public Object[][] textAndErrorsAndLangData() {
         return new Object[][]{
-                {"t_7", "There are too many questaons", LANG_EN, 1, "questaons"},
-                {"t_8", "Ther is so muuch confusion", LANG_EN, 2, "Ther", "muuch"},
+                {"t_7", "There are too many questaons", LANG_EN, 1},
+                {"t_8", "Ther is so muuch confusion", LANG_EN, 2},
         };
     }
 
     @DataProvider
     public Object[][] textAndErrorCodeData() {
         return new Object[][]{
-                {"t_11", "There are too many questaons", LANG_EN, CODE_UNKNOWN, 1, "questaons"},
-                {"t_12", "There is not one soLUTion", LANG_EN, CODE_CASE, 1, "soLUTion"},
-                {"t_13", "по полю гуляет кот кот и поет", LANG_RU, CODE_UNKNOWN, 1, "кот"},
-                {"t_14", "по полю гуляет коттт и поет", LANG_RU, CODE_UNKNOWN, 1, "коттт"},
-                {"t_15", "There is so much much much confusion", LANG_EN, CODE_REPEAT, 1, "much"},
-                {"t_16", "бывает все на свете свете хорошо", LANG_RU, CODE_REPEAT, 1, "свете"},
-        };
-    }
-
-    @DataProvider
-    public Object[][] httpMethodsData() {
-        return new Object[][]{
-                {GET, SC_OK, "questaons"},
-                {POST, SC_OK, "questaons"},
-                {PUT, SC_METHOD_NOT_ALLOWED, "questaons"},
-                {DELETE, SC_METHOD_NOT_ALLOWED, "questaons"},
-                {PATCH, SC_METHOD_NOT_ALLOWED, "questaons"},
+                {"t_11", "There are too many questaons", LANG_EN, CODE_UNKNOWN},
+                {"t_12", "There is not one soLUTion", LANG_EN, CODE_CASE},
+                {"t_13", "по полю гуляет кот кот и поет", LANG_RU, CODE_UNKNOWN},
+                {"t_14", "по полю гуляет коттт и поет", LANG_RU, CODE_UNKNOWN},
+                {"t_15", "There is so much much much confusion", LANG_EN, CODE_REPEAT},
+                {"t_16", "бывает все на свете свете хорошо", LANG_RU, CODE_REPEAT},
         };
     }
 
@@ -73,6 +59,5 @@ public class TextDataProvider {
                 {"t_20", "Ther is so muuch confusion", 2, "Ther", "muuch"},
         };
     }
-
 }
 

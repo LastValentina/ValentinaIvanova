@@ -24,12 +24,10 @@ public class CheckTextMethodTest {
                 .checkReturnedWordsIntoResponse(Arrays.asList(error));
     }
 
-
     @Test(enabled = false, dataProviderClass = hw8.TextDataProvider.class, dataProvider = "wrongWordData")
     public void checkTextWithErrorTest(String id, String value) {
         new CheckTextAssertions(new CheckTextService().getCheckText(value))
                 .checkReturnedWordsIntoResponse(value);
     }
-
 }
 

@@ -3,7 +3,6 @@
     <test name="LowLevelTest">
         <classes>
             <class name="hw8.low_level.CheckStatusContentTypeTest"/>
-            <class name="hw8.low_level.RequestMethodTest"/>
         </classes>
     </test>
     <test name="FunctionslLevelTest">

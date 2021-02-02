@@ -46,5 +46,4 @@ public class CheckTextAssertions {
         }
         return this;
     }
-
 }

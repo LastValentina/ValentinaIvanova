@@ -38,5 +38,4 @@ public class CommonService {
         specification.queryParams(params);
         return RestAssured.given(specification).get(uri);
     }
-
 }

@@ -11,12 +11,11 @@ public class CheckErrorCodeTest {
 
     @Test(description = "error code test",
             dataProviderClass = TextDataProvider.class, dataProvider = "textAndErrorCodeData")
-    public void checkTextTest(String textId, String value, String langData, int errorCode, int errorQty, String[] error) {
+    public void checkTextTest(String textId, String value, String langData, int errorCode) {
 
         new CheckTextAssertions(new CheckTextService().getCheckTextWithLangOptions(value, langData, Integer.toString(FIND_REPEAT_WORDS)))
                 .checkErrorCode(errorCode);
     }
-
 }
 
 

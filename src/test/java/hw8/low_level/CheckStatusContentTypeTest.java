@@ -34,5 +34,4 @@ public class CheckStatusContentTypeTest {
     public void checkStatusSimpleTest() {
         RestAssured.given().get(uri).then().statusCode(SC_OK);
     }
-
 }
